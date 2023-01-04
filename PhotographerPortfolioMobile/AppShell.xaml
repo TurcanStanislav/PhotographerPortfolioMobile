@@ -4,11 +4,49 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PhotographerPortfolioMobile"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:PhotographerPortfolioMobile.Views"
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem Title="Scanner"
+                FlyoutIcon="scanner">
+        <Tab>
+            <ShellContent
+                Title="QR"
+                Icon="qr_code.svg"
+                ContentTemplate="{DataTemplate views:QRScannerPage}"
+                Route="QrScannerPage" />
+            <ShellContent
+                Title="Image"
+                Icon="image.svg"
+                ContentTemplate="{DataTemplate views:ImageScannerPage}"
+                Route="ImageScannerPage" />
+            <ShellContent
+                Title="Watermark"
+                Icon="watermark.svg"
+                ContentTemplate="{DataTemplate views:WatermarkScannerPage}"
+                Route="WatermarkScannerPage" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="History"
+                FlyoutIcon="history">
+        <ShellContent
+                Title="History"
+                ContentTemplate="{DataTemplate views:HistoryPage}"
+                Route="HistoryPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Remove Ads"
+                FlyoutIcon="ads">
+        <ShellContent
+                Title="Remove Ads"
+                ContentTemplate="{DataTemplate views:AdsPage}"
+                Route="AdsPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Share App"
+                FlyoutIcon="share">
+        <ShellContent
+                Title="Share App"
+                ContentTemplate="{DataTemplate views:AppSharingPage}"
+                Route="AppSharingPage" />
+    </FlyoutItem>
 
-</Shell>
+</Shell> 

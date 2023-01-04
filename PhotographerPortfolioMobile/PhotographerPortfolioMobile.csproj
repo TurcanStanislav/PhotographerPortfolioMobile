@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.photographerportfoliomobile</ApplicationId>
-		<ApplicationIdGuid>CAEF3D25-D4AD-4304-932D-48BFB0594398</ApplicationIdGuid>
+		<ApplicationIdGuid>1bfae9f0-26c6-4254-9309-c8e55232b0db</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -46,6 +46,16 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	  <Folder Include="Controls\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview3" />
+	  <PackageReference Include="ZXing.Net.Maui" Version="0.1.0-preview.7" />
 	</ItemGroup>
 
 </Project>

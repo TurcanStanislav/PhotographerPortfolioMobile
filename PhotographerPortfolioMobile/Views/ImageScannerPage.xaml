@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PhotographerPortfolioMobile.Views.ImageScannerPage"
+             Title="Image Scanner Page">
+    
+    <VerticalStackLayout>
+        <Button Clicked="TakePhoto" Text="Take photo!"/>
+        <Label 
+            Text="Image Scanner Page"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+        
+</ContentPage>
