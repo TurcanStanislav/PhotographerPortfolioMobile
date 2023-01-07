@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:Class="PhotographerPortfolioMobile.Views.QRScannerPage"
              x:DataType="viewModels:QRScannerViewModel"
              Title="QR Scanner">
-    
-    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto">
+
+    <Grid ColumnDefinitions="*" RowDefinitions="*, Auto">
         <zxing:CameraBarcodeReaderView
             Grid.Row="0"
+            Grid.RowSpan="2"
+            IsVisible="{Binding IsScannerEnabled}"
+            IsEnabled="{Binding IsScannerEnabled}"
             x:Name="barcodeReader"
             IsTorchOn="False"
             IsDetecting="True"
             BarcodesDetected="OnBarcodeDetected" />
-
-        <WebView 
-            HeightRequest="300"
-            Grid.Row="1"
-            x:Name="webView"
-            Source="{Binding VideoUrl}"
-            BackgroundColor="Black"/>
-        <!--<xct: 
-            x:Name="videoPlayer"
-            Source="https://sec.ch9.ms/ch9/5d93/a1eab4bf-3288-4faf-81c4-294402a85d93/XamarinShow_mid.mp4"
-            ShowsPlaybackControls="True"
-            HorizontalOptions="Fill"
-            SeekCompleted="OnSeekCompleted" />-->
+        <Button IsVisible="{Binding IsDisplayVideoButtonEnabled}"
+                VerticalOptions="End" 
+                CornerRadius="15" 
+                Margin="20" 
+                Padding="5"
+                WidthRequest="300"
+                FontSize="20" 
+                Background="#3700db" 
+                Text="Watch The Video" 
+                Command="{Binding DisplayVideoByUrlCommand}" 
+                CommandParameter="{Binding VideoUrl}"/>
     </Grid>
     
 </ContentPage>

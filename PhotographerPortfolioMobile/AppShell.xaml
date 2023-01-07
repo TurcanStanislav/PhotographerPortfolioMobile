@@ -7,7 +7,7 @@
     xmlns:views="clr-namespace:PhotographerPortfolioMobile.Views"
     Shell.FlyoutBehavior="Flyout">
 
-    <FlyoutItem Title="Scanner"
+    <FlyoutItem Title="QR Scanner"
                 FlyoutIcon="scanner">
         <Tab>
             <ShellContent
@@ -15,16 +15,16 @@
                 Icon="qr_code.svg"
                 ContentTemplate="{DataTemplate views:QRScannerPage}"
                 Route="QrScannerPage" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Image Scanner"
+                FlyoutIcon="scanner">
+        <Tab>
             <ShellContent
                 Title="Image"
                 Icon="image.svg"
                 ContentTemplate="{DataTemplate views:ImageScannerPage}"
                 Route="ImageScannerPage" />
-            <ShellContent
-                Title="Watermark"
-                Icon="watermark.svg"
-                ContentTemplate="{DataTemplate views:WatermarkScannerPage}"
-                Route="WatermarkScannerPage" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="History"

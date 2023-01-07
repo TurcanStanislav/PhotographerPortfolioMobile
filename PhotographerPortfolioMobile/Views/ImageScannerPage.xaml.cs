@@ -1,10 +1,22 @@
+using PhotographerPortfolioMobile.Services.Interfaces;
+using ZXing.Net.Maui;
+
 namespace PhotographerPortfolioMobile.Views;
 
 public partial class ImageScannerPage : ContentPage
 {
-    public ImageScannerPage()
+    private IDeviceOrientationService _deviceOrientationService { get; }
+
+    public ImageScannerPage(IDeviceOrientationService deviceOrientationService)
     {
         InitializeComponent();
+        _deviceOrientationService = deviceOrientationService;
+    }
+
+    protected override async void OnAppearing()
+    {
+        imageScanner.CameraLocation = CameraLocation.Front;
+        imageScanner.CameraLocation = CameraLocation.Rear;
     }
 
     public async void TakePhoto(object sender, EventArgs e)

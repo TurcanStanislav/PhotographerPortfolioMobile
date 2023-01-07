@@ -1,24 +1,47 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PhotographerPortfolioMobile.Services;
+using PhotographerPortfolioMobile.Services.Interfaces;
+using PhotographerPortfolioMobile.Views;
 
 namespace PhotographerPortfolioMobile.ViewModels
 {
-    public partial class QRScannerViewModel : ObservableObject
+    public partial class QRScannerViewModel : BaseViewModel
     {
-        [ObservableProperty]
-        private string videoUrl = "";
-        private ScannerService _scannerService { get; set; }
+        private IScannerService ScannerService { get; set; }
 
-        public QRScannerViewModel(ScannerService scannerService)
+        [ObservableProperty]
+        private string videoUrl;
+
+        [ObservableProperty]
+        private bool isDisplayVideoButtonEnabled;
+
+        [ObservableProperty]
+        private bool isScannerEnabled = true;
+
+        public QRScannerViewModel(IScannerService scannerService)
         {
-            _scannerService = scannerService;
+            ScannerService = scannerService;
         }
 
         [RelayCommand]
-        public async Task GetVideoByQRCode(string storyId)
+        private async Task GetVideoUrlByQRCode(string storyId)
         {
-            VideoUrl = await _scannerService.GetVideoByQrCode(storyId);
+            VideoUrl = await ScannerService.GetVideoByQrCode(storyId);
+            if (!string.IsNullOrEmpty(VideoUrl))
+                IsDisplayVideoButtonEnabled = true;
+            else
+                IsDisplayVideoButtonEnabled = false;
+        }
+
+        [RelayCommand]
+        private async Task DisplayVideoByUrl(string url)
+        {
+            IsScannerEnabled = false;
+            if (!string.IsNullOrEmpty(url))
+                await Shell.Current.GoToAsync(nameof(VideoPlayerPage), true, new Dictionary<string, object>
+                {
+                    { "VideoUrl", url }
+                });
         }
     }
 }

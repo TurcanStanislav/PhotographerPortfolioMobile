@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+             x:Class="PhotographerPortfolioMobile.Views.VideoPlayerPage"
+             x:DataType="viewModel:VideoPlayerViewModel"
+             Title="Video Player Page">
+    <ScrollView>
+        <WebView 
+            x:Name="webView"
+            Source="{Binding VideoUrl}" HeightRequest="300"/>
+    </ScrollView>
+</ContentPage>

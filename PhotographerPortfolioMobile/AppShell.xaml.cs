@@ -10,9 +10,9 @@ public partial class AppShell : Shell
 
 		Routing.RegisterRoute(nameof(AdsPage), typeof(AdsPage));
 		Routing.RegisterRoute(nameof(HistoryPage), typeof(HistoryPage));
+		Routing.RegisterRoute(nameof(VideoPlayerPage), typeof(VideoPlayerPage));
 		Routing.RegisterRoute(nameof(AppSharingPage), typeof(AppSharingPage));
 		Routing.RegisterRoute(nameof(QRScannerPage), typeof(QRScannerPage));
 		Routing.RegisterRoute(nameof(ImageScannerPage), typeof(ImageScannerPage));
-		Routing.RegisterRoute(nameof(WatermarkScannerPage), typeof(WatermarkScannerPage));
 	}
 }
