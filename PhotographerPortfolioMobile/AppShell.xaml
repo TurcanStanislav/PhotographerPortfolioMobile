@@ -5,27 +5,104 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PhotographerPortfolioMobile"
     xmlns:views="clr-namespace:PhotographerPortfolioMobile.Views"
-    Shell.FlyoutBehavior="Flyout">
+    xmlns:controls="clr-namespace:PhotographerPortfolioMobile.Controls"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutHeaderBehavior="CollapseOnScroll">
+    
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="#00d4ff"
+                          Offset="0.1" />
+            <GradientStop Color="#090979"
+                          Offset="0.6" />
+            <GradientStop Color="#020024"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid
+                ColumnDefinitions="0.1*, 0.9*" 
+                Padding="20, 10, 10, 10"
+                ColumnSpacing="10"
+                VerticalOptions="Center">
+                <Image
+                    Grid.Column="0"
+                    Source="{Binding FlyoutIcon}"
+                    Aspect="AspectFill" />
+                <Label
+                    Grid.Column="1"
+                    Margin="10, 1, 0, 0"
+                    Text="{Binding Title}"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <!--<Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>-->
+
+    <!--<Shell.FlyoutFooter>
+        <controls:FlyoutFooter />
+    </Shell.FlyoutFooter>-->
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid 
+                BackgroundColor="Black">
+                <Image 
+                   Aspect="AspectFill"
+                   Source="header_background.jpg"
+                   Opacity="0.7" />
+                <Label 
+                    Text="Menu"
+                    FontSize="30"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout 
+                BackgroundColor="DarkSlateBlue">
+                <Label 
+                    Text="Photographer Portfolio"
+                    TextColor="GhostWhite"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center" />
+
+                <Label 
+                    Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}"
+                    TextColor="GhostWhite"
+                    HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+
 
     <FlyoutItem Title="QR Scanner"
                 FlyoutIcon="scanner">
-        <Tab>
-            <ShellContent
+        <ShellContent
                 Title="QR"
-                Icon="qr_code.svg"
                 ContentTemplate="{DataTemplate views:QRScannerPage}"
                 Route="QrScannerPage" />
-        </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Image Scanner"
-                FlyoutIcon="scanner">
-        <Tab>
-            <ShellContent
+                FlyoutIcon="image_scan">
+        <ShellContent
                 Title="Image"
-                Icon="image.svg"
                 ContentTemplate="{DataTemplate views:ImageScannerPage}"
                 Route="ImageScannerPage" />
-        </Tab>
     </FlyoutItem>
     <FlyoutItem Title="History"
                 FlyoutIcon="history">

@@ -12,23 +12,21 @@ public partial class QRScannerPage : ContentPage
         InitializeComponent();
         _viewModel = vm;
         BindingContext = vm;
-
+    }
+    protected override async void OnAppearing()
+    {
+        _viewModel.IsScannerEnabled = true;
         barcodeReader.Options = new BarcodeReaderOptions
         {
             AutoRotate = true,
             Multiple = true
         };
-    }
-    protected override async void OnAppearing()
-    {
-        _viewModel.IsDisplayVideoButtonEnabled = false;
-        _viewModel.IsScannerEnabled = true;
         barcodeReader.CameraLocation = CameraLocation.Front;
         barcodeReader.CameraLocation = CameraLocation.Rear;
     }
 
     private async void OnBarcodeDetected(object sender, BarcodeDetectionEventArgs e)
     {
-        await _viewModel.GetVideoUrlByQRCodeCommand.ExecuteAsync(e.Results.FirstOrDefault().Value);
+        await _viewModel.DisplayVideoByQRCodeCommand.ExecuteAsync(e.Results.FirstOrDefault().Value);
     }
 }

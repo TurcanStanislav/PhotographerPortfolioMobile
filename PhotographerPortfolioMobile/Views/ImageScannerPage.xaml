@@ -2,20 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:Class="PhotographerPortfolioMobile.Views.ImageScannerPage"
+             x:DataType="viewModels:ImageScannerViewModel"
              Title="Image Scanner Page">
 
     <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <zxing:CameraView
+        <!--<zxing:CameraView
             x:Name="imageScanner"
-            IsTorchOn="False" />
+            IsTorchOn="False"
+            IsEnabled="{Binding IsScannerEnabled}"
+            IsVisible="{Binding IsScannerEnabled}" />-->
     </Grid>
-    <!--<VerticalStackLayout>
-        <Button Clicked="TakePhoto" Text="Take photo!"/>
-        <Label 
-            Text="Image Scanner Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>-->
-        
 </ContentPage>

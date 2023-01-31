@@ -6,5 +6,8 @@ namespace PhotographerPortfolioMobile.ViewModels
     {
         [ObservableProperty]
         private string title;
+
+        [ObservableProperty]
+        private bool isBusy;
     }
 }

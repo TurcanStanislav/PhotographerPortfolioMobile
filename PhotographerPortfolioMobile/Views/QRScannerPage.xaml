@@ -15,19 +15,8 @@
             IsEnabled="{Binding IsScannerEnabled}"
             x:Name="barcodeReader"
             IsTorchOn="False"
-            IsDetecting="True"
+            IsDetecting="{Binding IsScannerEnabled}"
             BarcodesDetected="OnBarcodeDetected" />
-        <Button IsVisible="{Binding IsDisplayVideoButtonEnabled}"
-                VerticalOptions="End" 
-                CornerRadius="15" 
-                Margin="20" 
-                Padding="5"
-                WidthRequest="300"
-                FontSize="20" 
-                Background="#3700db" 
-                Text="Watch The Video" 
-                Command="{Binding DisplayVideoByUrlCommand}" 
-                CommandParameter="{Binding VideoUrl}"/>
     </Grid>
     
 </ContentPage>

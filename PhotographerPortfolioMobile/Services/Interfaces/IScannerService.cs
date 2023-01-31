@@ -4,7 +4,8 @@ namespace PhotographerPortfolioMobile.Services.Interfaces
 {
     public interface IScannerService
     {
-        Task<string> GetVideoByQrCode(string storyId);
+        Task<QRScannerResponse> GetVideoUrlByQrCode(string storyId);
+        Task<string> GetVideoUrlByImage(FileResult image);
         Task<IEnumerable<Story>> GetStories();
     }
 }

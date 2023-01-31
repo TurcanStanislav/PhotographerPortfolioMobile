@@ -2,12 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+             xmlns:media="clr-namespace:CommunityToolkit.Maui.MediaElement;assembly=CommunityToolkit.Maui.MediaElement"
              x:Class="PhotographerPortfolioMobile.Views.VideoPlayerPage"
              x:DataType="viewModel:VideoPlayerViewModel"
              Title="Video Player Page">
-    <ScrollView>
-        <WebView 
+    <ScrollView BackgroundColor="Black">
+        <media:MediaElement 
+            x:Name="videoPlayer"
+            AutoPlay="True"
+            Source="{Binding VideoUrl}" />
+
+        <!--<WebView 
+            HeightRequest="{Binding VideoHeight}"
             x:Name="webView"
-            Source="{Binding VideoUrl}" HeightRequest="300"/>
+            Source="{Binding VideoUrl}" />-->
     </ScrollView>
 </ContentPage>
