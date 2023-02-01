@@ -1,6 +1,6 @@
 ﻿namespace PhotographerPortfolioMobile.Models
 {
-    public class QRScannerResponse : ScannerResponse
+    public class ImageScannerResponse : ScannerResponse
     {
     }
 }

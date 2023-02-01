@@ -27,7 +27,7 @@ namespace PhotographerPortfolioMobile.Services.ScannerService
             return qrScannerResponse;
         }
 
-        public async Task<string> GetVideoUrlByImage(FileResult image)
+        public async Task<ImageScannerResponse> GetVideoUrlByImage(FileResult image)
         {
             var imageBytes = await ImageConvertor.ScaleImage(image);
 
@@ -44,8 +44,9 @@ namespace PhotographerPortfolioMobile.Services.ScannerService
 
             var response = await Client.PostAsync(Constants.GetVideoByImageUrl, content);
 
-            var relativeVideoPath = await response.Content.ReadAsStringAsync();
-            return string.Concat(Constants.BaseUrl, relativeVideoPath);
+            string json = await response.Content.ReadAsStringAsync();
+            var imageScannerResponse = JsonConvert.DeserializeObject<ImageScannerResponse>(json);
+            return imageScannerResponse;
         }
 
         public async Task<IEnumerable<Story>> GetStories()

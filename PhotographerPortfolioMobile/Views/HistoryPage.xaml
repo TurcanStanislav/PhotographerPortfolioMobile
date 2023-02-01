@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:PhotographerPortfolioMobile.Models"
+             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:Class="PhotographerPortfolioMobile.Views.HistoryPage"
+             x:DataType="viewModels:HistoryViewModel"
              Title="History">
-    <VerticalStackLayout>
-        <Label 
-            Text="History Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView BackgroundColor="MediumVioletRed">
+        <Grid
+            ColumnDefinitions="*"
+            ColumnSpacing="5"
+            RowDefinitions="*,Auto"
+            RowSpacing="0">
+            <ContentView>
+                <CollectionView
+                    ItemsSource="{Binding Stories}"
+                    SelectionMode="None" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Story">
+                            <Grid Padding="0" Margin="2,5,2,5" HorizontalOptions="Fill">
+                                <Frame HeightRequest="125">
+                                    <Frame.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#00d4ff" Offset="0.1" />
+                                            <GradientStop Color="#090979" Offset="0.6" />
+                                            <GradientStop Color="#020024" Offset="1.0" />
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
+                                    <Grid Padding="0" ColumnDefinitions="125,*,*">
+                                        <Frame CornerRadius="5">
+                                            <Image
+                                                Aspect="AspectFill"
+                                                HeightRequest="125"
+                                                Source="{Binding ThumbPath}"
+                                                WidthRequest="125" />
+                                        </Frame>
+                                        <VerticalStackLayout
+                                            VerticalOptions="Center"
+                                            Grid.Column="1"
+                                            Padding="10">
+                                            <Label Text="{Binding StoryTitle}" TextColor="NavajoWhite" FontSize="18" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Description}" TextColor="White" />
+                                        </VerticalStackLayout>
+                                        <Grid Padding="0" Grid.Column="2" RowDefinitions="*,100">
+                                            <Label 
+                                                FontSize="12"
+                                                FontAttributes="Bold"
+                                                Grid.Row="1"
+                                                Text="{Binding CreationTime}" 
+                                                TextColor="White" 
+                                                HorizontalOptions="End"
+                                                VerticalOptions="End"/>
+                                        </Grid>
+                                    </Grid>
+                                    <Frame.Shadow>
+                                        <Shadow Brush="Black"
+                                            Offset="100,100"
+                                            Opacity="0.8" />
+                                    </Frame.Shadow>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </Grid>
+    </ScrollView>
 </ContentPage>

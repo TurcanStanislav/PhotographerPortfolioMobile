@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
 using PhotographerPortfolioMobile.Views;
 
@@ -7,7 +8,8 @@ namespace PhotographerPortfolioMobile.ViewModels
 {
     public partial class ImageScannerViewModel : BaseViewModel
     {
-        private IScannerService ScannerService { get; }
+        private readonly IScannerService ScannerService;
+        private readonly IViewedStoryService ViewedStoryService;
 
         [ObservableProperty]
         private string videoUrl;
@@ -15,27 +17,23 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         private bool isScannerEnabled = true;
 
-        public ImageScannerViewModel(IScannerService scannerService)
+        public ImageScannerViewModel(IScannerService scannerService, IViewedStoryService viewedStoryService)
         {
             ScannerService = scannerService;
+            ViewedStoryService = viewedStoryService;
         }
 
         [RelayCommand]
         public async Task GetVideoUrlByImage(FileResult fileResult)
         {
-            VideoUrl = await ScannerService.GetVideoUrlByImage(fileResult);
+            var response = await ScannerService.GetVideoUrlByImage(fileResult);
 
-            if (!string.IsNullOrEmpty(VideoUrl))
+            if (response.Success == true)
             {
-                IsScannerEnabled = false;
-                if (MainThread.IsMainThread)
-                {
-                    await Shell.Current.GoToAsync(nameof(VideoPlayerPage), true, new Dictionary<string, object>
-                    {
-                        { "VideoUrl", VideoUrl }
-                    });
-                }
-                else
+                await ViewedStoryService.SaveViewedStory(new ViewedStory { StoryId = response.StoryId, WatchedTime = DateTimeOffset.Now });
+
+                VideoUrl = string.Concat(Constants.BaseUrl, response.VideoUrl);
+                if (!string.IsNullOrEmpty(VideoUrl))
                 {
                     await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
@@ -45,6 +43,14 @@ namespace PhotographerPortfolioMobile.ViewModels
                         });
                     });
                 }
+            }
+            else
+            {
+                IsScannerEnabled = true;
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await Shell.Current.DisplayAlert("Warning", response.ErrorMessage, "Ok");
+                });
             }
         }
     }

@@ -1,8 +1,13 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.MediaElement;
+using PhotographerPortfolioMobile.Database;
+using PhotographerPortfolioMobile.Repositories;
+using PhotographerPortfolioMobile.Repositories.Interfaces;
 using PhotographerPortfolioMobile.Services.DeviceOrientationService;
+using PhotographerPortfolioMobile.Services.HistoryService;
 using PhotographerPortfolioMobile.Services.Interfaces;
 using PhotographerPortfolioMobile.Services.ScannerService;
+using PhotographerPortfolioMobile.Services.ViewedStoryService;
 using PhotographerPortfolioMobile.ViewModels;
 using PhotographerPortfolioMobile.Views;
 using System.Runtime.Versioning;
@@ -34,19 +39,28 @@ public static class MauiProgram
 
         //Services
         builder.Services.AddTransient<HttpClient>();
+        builder.Services.AddTransient<IHistoryService, HistoryService>();
         builder.Services.AddTransient<IScannerService, ScannerService>();
         builder.Services.AddTransient<IDeviceOrientationService, DeviceOrientationService>();
+        builder.Services.AddTransient<IViewedStoryService, ViewedStoryService>();
+
+        //Repositories
+        builder.Services.AddTransient<IViewedStoryRepository, ViewedStoryRepository>();
 
         //ViewModels
         builder.Services.AddTransient<QRScannerViewModel>();
-        builder.Services.AddTransient<QRScannerPage>();
-
         builder.Services.AddTransient<VideoPlayerViewModel>();
-        builder.Services.AddTransient<VideoPlayerPage>();
+        builder.Services.AddTransient<ImageScannerViewModel>();
+        builder.Services.AddTransient<HistoryViewModel>();
 
         //Pages
-        builder.Services.AddTransient<ImageScannerViewModel>();
+        builder.Services.AddTransient<QRScannerPage>();
+        builder.Services.AddTransient<VideoPlayerPage>();
         builder.Services.AddTransient<ImageScannerPage>();
+        builder.Services.AddTransient<HistoryPage>();
+
+        //Db
+        builder.Services.AddTransient<AppDbContext>();
 
         return builder.Build();
     }

@@ -4,13 +4,13 @@ namespace PhotographerPortfolioMobile.Views;
 
 public partial class ImageScannerPage : ContentPage
 {
-    private ImageScannerViewModel ViewModel { get; }
+    private ImageScannerViewModel ImageScannerViewModel { get; }
 
-    public ImageScannerPage(ImageScannerViewModel viewModel)
+    public ImageScannerPage(ImageScannerViewModel imageScannerViewModel)
     {
         InitializeComponent();
-        BindingContext = viewModel;
-        ViewModel = viewModel;
+        BindingContext = imageScannerViewModel;
+        ImageScannerViewModel = imageScannerViewModel;
     }
 
     protected override async void OnAppearing()
@@ -19,25 +19,6 @@ public partial class ImageScannerPage : ContentPage
         FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
         if (photo != null)
-            await ViewModel.GetVideoUrlByImageCommand.ExecuteAsync(photo);
-        else await Shell.Current.GoToAsync(nameof(QRScannerPage));
+            await ImageScannerViewModel.GetVideoUrlByImageCommand.ExecuteAsync(photo);
     }
-
-    //public async void TakePhoto(object sender, EventArgs e)
-    //{
-    //    if (MediaPicker.Default.IsCaptureSupported)
-    //    {
-
-    //        if (photo != null)
-    //        {
-    //            // save the file into local storage
-    //            string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
-
-    //            using Stream sourceStream = await photo.OpenReadAsync();
-    //            using FileStream localFileStream = File.OpenWrite(localFilePath);
-
-    //            await sourceStream.CopyToAsync(localFileStream);
-    //        }
-    //    }
-    //}
 }

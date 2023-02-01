@@ -8,7 +8,8 @@ namespace PhotographerPortfolioMobile.ViewModels
 {
     public partial class QRScannerViewModel : BaseViewModel
     {
-        private IScannerService ScannerService { get; set; }
+        private readonly IScannerService ScannerService;
+        private readonly IViewedStoryService ViewedStoryService;
 
         [ObservableProperty]
         private string videoUrl;
@@ -16,9 +17,10 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         private bool isScannerEnabled = true;
 
-        public QRScannerViewModel(IScannerService scannerService)
+        public QRScannerViewModel(IScannerService scannerService, IViewedStoryService viewedStoryService)
         {
             ScannerService = scannerService;
+            ViewedStoryService = viewedStoryService;
         }
 
         [RelayCommand]
@@ -29,6 +31,8 @@ namespace PhotographerPortfolioMobile.ViewModels
 
             if (response.Success == true)
             {
+                await ViewedStoryService.SaveViewedStory(new ViewedStory { StoryId = response.StoryId, WatchedTime = DateTimeOffset.Now });
+
                 VideoUrl = string.Concat(Constants.BaseUrl, response.VideoUrl);
                 if (!string.IsNullOrEmpty(VideoUrl))
                 {

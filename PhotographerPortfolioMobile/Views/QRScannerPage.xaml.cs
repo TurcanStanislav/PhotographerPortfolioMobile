@@ -13,7 +13,7 @@ public partial class QRScannerPage : ContentPage
         _viewModel = vm;
         BindingContext = vm;
     }
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         _viewModel.IsScannerEnabled = true;
         barcodeReader.Options = new BarcodeReaderOptions
