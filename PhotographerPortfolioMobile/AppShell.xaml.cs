@@ -14,5 +14,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(AppSharingPage), typeof(AppSharingPage));
 		Routing.RegisterRoute(nameof(QRScannerPage), typeof(QRScannerPage));
 		Routing.RegisterRoute(nameof(ImageScannerPage), typeof(ImageScannerPage));
+		Routing.RegisterRoute(nameof(StoryDetailsPage), typeof(StoryDetailsPage));
 	}
 }

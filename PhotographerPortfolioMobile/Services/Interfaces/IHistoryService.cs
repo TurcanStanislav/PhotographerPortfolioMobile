@@ -5,6 +5,6 @@ namespace PhotographerPortfolioMobile.Services.Interfaces
 {
     public interface IHistoryService
     {
-        Task<ObservableCollection<Story>> GetStoriesByIds();
+        Task<ObservableCollection<Story>> GetViewedStories();
     }
 }

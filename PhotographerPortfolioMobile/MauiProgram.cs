@@ -52,12 +52,14 @@ public static class MauiProgram
         builder.Services.AddTransient<VideoPlayerViewModel>();
         builder.Services.AddTransient<ImageScannerViewModel>();
         builder.Services.AddTransient<HistoryViewModel>();
+        builder.Services.AddTransient<StoryDetailsViewModel>();
 
         //Pages
         builder.Services.AddTransient<QRScannerPage>();
         builder.Services.AddTransient<VideoPlayerPage>();
         builder.Services.AddTransient<ImageScannerPage>();
         builder.Services.AddTransient<HistoryPage>();
+        builder.Services.AddTransient<StoryDetailsPage>();
 
         //Db
         builder.Services.AddTransient<AppDbContext>();

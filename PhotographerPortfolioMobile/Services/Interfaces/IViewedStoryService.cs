@@ -6,9 +6,11 @@ namespace PhotographerPortfolioMobile.Services.Interfaces
     {
         Task<List<ViewedStory>> GetViewedStories();
 
-        Task<ViewedStory> GetViewedStory(string viewedStoryId);
+        Task<ViewedStory> GetViewedStoryById(string viewedStoryId);
 
         Task<int> SaveViewedStory(ViewedStory item);
+
+        Task<int> UpdateViewedStory(ViewedStory item);
 
         Task<int> DeleteViewedStory(ViewedStory item);
     }

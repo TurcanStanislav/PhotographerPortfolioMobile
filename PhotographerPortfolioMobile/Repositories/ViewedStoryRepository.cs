@@ -19,20 +19,24 @@ namespace PhotographerPortfolioMobile.Repositories
             return await DbConnection.Table<ViewedStory>().ToListAsync();
         }
 
-        public async Task<ViewedStory> GetViewedStory(string viewedStoryId)
+        public async Task<ViewedStory> GetViewedStoryById(string viewedStoryId)
         {
             return await DbConnection.Table<ViewedStory>().Where(i => i.ViewedStoryId == viewedStoryId).FirstOrDefaultAsync();
         }
 
+        public async Task<ViewedStory> GetViewedStoryByStoryId(string storyId)
+        {
+            return await DbConnection.Table<ViewedStory>().Where(i => i.StoryId == storyId).FirstOrDefaultAsync();
+        }
+
         public async Task<int> SaveViewedStory(ViewedStory item)
         {
-            if (item.ViewedStoryId != null)
-                return await DbConnection.UpdateAsync(item);
-            else
-            {
-                var a = await DbConnection.InsertAsync(item);
-                return a;
-            }
+            return await DbConnection.InsertAsync(item);
+        }
+
+        public async Task<int> UpdateViewedStory(ViewedStory item)
+        {
+            return await DbConnection.UpdateAsync(item);
         }
 
         public async Task<int> DeleteViewedStory(ViewedStory item)

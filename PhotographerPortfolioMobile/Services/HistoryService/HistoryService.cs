@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Newtonsoft.Json;
+using PhotographerPortfolioMobile.Extensions;
 using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
 using System.Collections.ObjectModel;
@@ -19,13 +21,14 @@ namespace PhotographerPortfolioMobile.Services.HistoryService
             Client.DefaultRequestHeaders.Add("X-Ngrok-Auth", "2Jrkkhe3SjQFOyYw4own0XKsnfT_7djFeGu8wfMqjYo7F6WQ2");
         }
 
-        public async Task<ObservableCollection<Story>> GetStoriesByIds()
+        public async Task<ObservableCollection<Story>> GetViewedStories()
         {
             var viewedStories = await ViewedStoryService.GetViewedStories();
-            var orderedDescViewedStories = viewedStories.OrderByDescending(x => x.WatchedTime).ToList();
             var ids = viewedStories.Select(x => x.StoryId).ToList();
 
-            var content = new StringContent(JsonConvert.SerializeObject(ids), Encoding.UTF8, "application/json");
+            var data = new { Ids = ids, TimeZoneId = TimeZoneInfo.Local.Id };
+
+            var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
             var response = await Client.PostAsync(Constants.GetStoriesByIdsUrl, content);
 
             string json = await response.Content.ReadAsStringAsync();
@@ -33,10 +36,16 @@ namespace PhotographerPortfolioMobile.Services.HistoryService
 
             foreach (var story in stories)
             {
+                story.CreationTime = story.CreationTime;
+                story.WatchedTime = viewedStories.Where(x => x.StoryId == story.StoryId)
+                                                 .FirstOrDefault().WatchedTime
+                                                 .ConvertToTimeZone();
                 story.ImagePath = string.Concat(Constants.BaseUrl, story.ImagePath);
                 story.ThumbPath = string.Concat(Constants.BaseUrl, story.ThumbPath);
                 story.VideoPath = string.Concat(Constants.BaseUrl, story.VideoPath);
             }
+
+            stories = stories.OrderByDescending(x => x.WatchedTime).ToObservableCollection();
 
             return stories;
         }

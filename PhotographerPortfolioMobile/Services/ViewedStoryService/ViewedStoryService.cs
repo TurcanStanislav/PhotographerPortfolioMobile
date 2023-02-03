@@ -13,9 +13,14 @@ namespace PhotographerPortfolioMobile.Services.ViewedStoryService
             ViewedStoryRepository = viewedStoryRepository;
         }
 
-        public Task<ViewedStory> GetViewedStory(string viewedStoryId)
+        public Task<ViewedStory> GetViewedStoryById(string viewedStoryId)
         {
-            return ViewedStoryRepository.GetViewedStory(viewedStoryId);
+            return ViewedStoryRepository.GetViewedStoryByStoryId(viewedStoryId);
+        }
+
+        public Task<ViewedStory> GetViewedStoryByStoryId(string storyId)
+        {
+            return ViewedStoryRepository.GetViewedStoryByStoryId(storyId);
         }
 
         public Task<List<ViewedStory>> GetViewedStories()
@@ -23,14 +28,43 @@ namespace PhotographerPortfolioMobile.Services.ViewedStoryService
             return ViewedStoryRepository.GetViewedStories();
         }
 
-        public Task<int> DeleteViewedStory(ViewedStory item)
+        public async Task<int> DeleteViewedStory(ViewedStory item)
         {
-            return ViewedStoryRepository.DeleteViewedStory(item);
+            var viewedStory = await ViewedStoryRepository.GetViewedStoryById(item.StoryId);
+
+            if (item != null)
+                return await ViewedStoryRepository.DeleteViewedStory(item);
+            else
+            {
+                var isSuccessful = 0;
+                return isSuccessful;
+            }
         }
 
-        public Task<int> SaveViewedStory(ViewedStory item)
+        public async Task<int> SaveViewedStory(ViewedStory item)
         {
-            return ViewedStoryRepository.SaveViewedStory(item);
+            var viewedStory = await ViewedStoryRepository.GetViewedStoryByStoryId(item.StoryId);
+
+            if (item != null && item.ViewedStoryId != null && viewedStory == null)
+                return await ViewedStoryRepository.SaveViewedStory(item);
+            else
+            {
+                var isSuccessful = 0;
+                return isSuccessful;
+            }
+        }
+
+        public async Task<int> UpdateViewedStory(ViewedStory item)
+        {
+            var viewedStory = await ViewedStoryRepository.GetViewedStoryById(item.StoryId);
+
+            if (item != null)
+                return await ViewedStoryRepository.UpdateViewedStory(item);
+            else
+            {
+                var isSuccessful = 0;
+                return isSuccessful;
+            }
         }
     }
 }

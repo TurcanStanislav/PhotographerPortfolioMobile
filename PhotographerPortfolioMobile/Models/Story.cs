@@ -8,7 +8,8 @@
         public string ImagePath { get; set; }
         public string ThumbPath { get; set; }
         public string VideoPath { get; set; }
-        public DateTimeOffset? CreationTime { get; set; }
+        public DateTime CreationTime { get; set; }
+        public DateTime? WatchedTime { get; set; }
         public string QRCode { get; set; }
     }
 }

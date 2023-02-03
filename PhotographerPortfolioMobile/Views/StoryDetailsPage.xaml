@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="PhotographerPortfolioMobile.Views.StoryDetailsPage"
+             x:DataType="viewModels:StoryDetailsViewModel"
+             x:Name="storyDetailsPage"
+             Title="{Binding Title}">
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,*">
+            <BoxView Color="Orange"
+                     Grid.RowSpan="2"
+                     HorizontalOptions="Fill"
+                     VerticalOptions="Fill" 
+                     CornerRadius="0, 0, 60, 60"/>
+
+            <Border StrokeShape="RoundRectangle 80"
+                    Stroke="White"
+                    StrokeThickness="6"
+                    Margin="0,8,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Image Aspect="AspectFit"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       HeightRequest="{Binding StoryImageHeight}"
+                       Source="{Binding Story.ThumbPath}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                              Command="{Binding ShowImagePopupCommand}" 
+                                              CommandParameter="{x:Reference storyDetailsPage}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Border>
+
+            <Grid Grid.Row="1"  
+                  RowDefinitions="Auto,*">
+                <Label Grid.Row="0"
+                       TextColor="White"
+                       FontSize="20"
+                       Margin="0,0,0,0"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Text="{Binding Story.StoryTitle}"/>
+                <Label Grid.Row="1" 
+                       FontSize="14" 
+                       TextColor="White" 
+                       HorizontalOptions="Center" 
+                       Text="{Binding Story.CreationTime}" />
+            </Grid>
+            
+            <Grid RowDefinitions="Auto,*"
+                  Grid.Row="2">
+                <Button Grid.Row="0"
+                        Text="Watch Video"
+                        HorizontalOptions="Center"
+                        Margin="0,5,0,0"
+                        BackgroundColor="White"
+                        TextColor="Orange"
+                        FontAttributes="Bold"
+                        BorderColor="Orange"
+                        BorderWidth="5"
+                        CornerRadius="20"
+                        FontSize="16"
+                        HeightRequest="40"
+                        WidthRequest="200"
+                        Command="{Binding DisplayVideoPlayerCommand}"
+                        CommandParameter="{Binding Story.VideoPath}"/>
+                <Label Grid.Row="1"
+                       Padding="10"  
+                       FontSize="16" 
+                       TextColor="Black" 
+                       Text="{Binding Story.Description}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

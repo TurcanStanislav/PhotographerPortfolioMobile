@@ -31,7 +31,7 @@ namespace PhotographerPortfolioMobile.ViewModels
 
             if (response.Success == true)
             {
-                await ViewedStoryService.SaveViewedStory(new ViewedStory { StoryId = response.StoryId, WatchedTime = DateTimeOffset.Now });
+                await ViewedStoryService.SaveViewedStory(new ViewedStory { StoryId = response.StoryId, WatchedTime = DateTime.UtcNow });
 
                 VideoUrl = string.Concat(Constants.BaseUrl, response.VideoUrl);
                 if (!string.IsNullOrEmpty(VideoUrl))
