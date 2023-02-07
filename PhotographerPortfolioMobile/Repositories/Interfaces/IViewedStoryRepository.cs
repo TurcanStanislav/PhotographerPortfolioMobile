@@ -6,6 +6,8 @@ namespace PhotographerPortfolioMobile.Repositories.Interfaces
     {
         Task<List<ViewedStory>> GetViewedStories();
 
+        Task<List<ViewedStory>> GetFavoriteViewedStories();
+
         Task<ViewedStory> GetViewedStoryById(string viewedStoryId);
 
         Task<ViewedStory> GetViewedStoryByStoryId(string storyId);

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:PhotographerPortfolioMobile.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+             x:Class="PhotographerPortfolioMobile.Views.FavoriteStoriesPage"
+             x:DataType="viewModels:FavoriteStoriesViewModel"
+             Title="Favorite Stories">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Appearing"
+            Command="{Binding GetFavoriteViewedStoriesCommand}"/>
+    </ContentPage.Behaviors>
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshFavoriteViewedStoriesCommand}">
+        <ScrollView BackgroundColor="LightCyan">
+            <Grid ColumnDefinitions="*"
+                  RowDefinitions="*">
+                <CollectionView Grid.Row="1"
+                                ItemsSource="{Binding Stories}"
+                                SelectionMode="None" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Story">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=DeleteFromFavoritesCommand}"
+                                                       CommandParameter="{Binding StoryId}">
+                                            <Frame BackgroundColor="LightPink"
+                                                   BorderColor="WhiteSmoke"
+                                                   WidthRequest="60"
+                                                   HeightRequest="60"
+                                                   CornerRadius="50" 
+                                                   Padding="0">
+                                                <Image Source="delete_icon.svg" 
+                                                       WidthRequest="30" 
+                                                       HeightRequest="30" 
+                                                       Aspect="AspectFill"/>
+                                            </Frame>
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Grid Padding="0" 
+                                      Margin="5,5,5,5" 
+                                      HorizontalOptions="Fill">
+                                    <Border StrokeShape="RoundRectangle 30"
+                                            Stroke="White"
+                                            StrokeThickness="5">
+                                        <Border.Shadow>
+                                            <Shadow Brush="#00d4ff"
+                                                    Offset="20,15"
+                                                    Opacity="0.7" />
+                                        </Border.Shadow>
+                                        <Frame HeightRequest="125" Padding="0">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=GoToStoryDetailsCommand}"
+                                                                CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Frame.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#00d4ff" Offset="0.1" />
+                                                    <GradientStop Color="#090979" Offset="0.6" />
+                                                    <GradientStop Color="#020024" Offset="1.0" />
+                                                </LinearGradientBrush>
+                                            </Frame.Background>
+                                            <Grid Padding="0" 
+                                                  Margin="0" 
+                                                  ColumnDefinitions="125,*">
+                                                <Frame CornerRadius="5"
+                                                       Grid.Column="0">
+                                                    <Image Aspect="AspectFill"
+                                                           HeightRequest="125"
+                                                           Source="{Binding ThumbPath}"
+                                                           WidthRequest="125" />
+                                                </Frame>
+                                                <Grid Grid.Column="1" 
+                                                      RowDefinitions="30,3*,*"
+                                                      Margin="10,0,0,0">
+                                                    <Label Grid.Row="0"
+                                                            Text="{Binding StoryTitle}" 
+                                                            TextColor="NavajoWhite" 
+                                                            VerticalOptions="End"
+                                                            HorizontalOptions="Start"
+                                                            FontSize="18" 
+                                                            FontAttributes="Bold"/>
+                                                    <Label Grid.Row="1"
+                                                            Text="{Binding Path=Description, StringFormat='{0}...'}" 
+                                                            MaxLines="4"
+                                                            FontSize="14"
+                                                            TextColor="White"/>
+                                                    <Label Grid.Row="2"
+                                                            FontSize="11"
+                                                            FontAttributes="Bold"
+                                                            Padding="0,0,20,0"
+                                                            Text="{Binding WatchedTime}" 
+                                                            TextColor="White" 
+                                                            HorizontalOptions="End"
+                                                            VerticalOptions="Start"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Frame>
+                                    </Border>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator
+                    HorizontalOptions="Fill"
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="BlueViolet"
+                    VerticalOptions="Center" />
+            </Grid>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

@@ -6,6 +6,5 @@ namespace PhotographerPortfolioMobile.Services.Interfaces
     {
         Task<QRScannerResponse> GetVideoUrlByQrCode(string storyId);
         Task<ImageScannerResponse> GetVideoUrlByImage(FileResult image);
-        Task<IEnumerable<Story>> GetStories();
     }
 }

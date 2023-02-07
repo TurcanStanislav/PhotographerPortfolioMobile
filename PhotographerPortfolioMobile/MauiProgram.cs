@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.MediaElement;
 using PhotographerPortfolioMobile.Database;
 using PhotographerPortfolioMobile.Repositories;
 using PhotographerPortfolioMobile.Repositories.Interfaces;
@@ -53,6 +52,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ImageScannerViewModel>();
         builder.Services.AddTransient<HistoryViewModel>();
         builder.Services.AddTransient<StoryDetailsViewModel>();
+        builder.Services.AddTransient<FavoriteStoriesViewModel>();
 
         //Pages
         builder.Services.AddTransient<QRScannerPage>();
@@ -60,6 +60,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ImageScannerPage>();
         builder.Services.AddTransient<HistoryPage>();
         builder.Services.AddTransient<StoryDetailsPage>();
+        builder.Services.AddTransient<FavoriteStoriesPage>();
 
         //Db
         builder.Services.AddTransient<AppDbContext>();

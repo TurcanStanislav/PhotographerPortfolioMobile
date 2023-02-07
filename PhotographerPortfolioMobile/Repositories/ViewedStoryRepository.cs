@@ -18,6 +18,10 @@ namespace PhotographerPortfolioMobile.Repositories
         {
             return await DbConnection.Table<ViewedStory>().ToListAsync();
         }
+        public async Task<List<ViewedStory>> GetFavoriteViewedStories()
+        {
+            return await DbConnection.Table<ViewedStory>().Where(x => x.IsFavorite == true).ToListAsync();
+        }
 
         public async Task<ViewedStory> GetViewedStoryById(string viewedStoryId)
         {

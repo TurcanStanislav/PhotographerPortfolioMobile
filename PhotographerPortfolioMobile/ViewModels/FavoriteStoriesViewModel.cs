@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace PhotographerPortfolioMobile.ViewModels
 {
-    public partial class HistoryViewModel : BaseViewModel
+    public partial class FavoriteStoriesViewModel : BaseViewModel
     {
         private readonly IHistoryService HistoryService;
         private readonly IViewedStoryService ViewedStoryService;
@@ -18,26 +18,26 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         public bool isRefreshing = false;
 
-        public HistoryViewModel(IHistoryService historyService, IViewedStoryService viewedStoryService)
+        public FavoriteStoriesViewModel(IHistoryService historyService, IViewedStoryService viewedStoryService)
         {
             HistoryService = historyService;
             ViewedStoryService = viewedStoryService;
         }
 
         [RelayCommand]
-        public async Task GetViewedStories()
+        public async Task GetFavoriteViewedStories()
         {
             IsBusy = true;
             if (Stories.Count == 0)
-                Stories = await HistoryService.GetViewedStories();
+                Stories = await HistoryService.GetViewedStories(x => x.IsFavorite == true);
             IsBusy = false;
         }
 
         [RelayCommand]
-        public async Task RefreshViewedStories()
+        public async Task RefreshFavoriteViewedStories()
         {
             IsRefreshing = true;
-            Stories = await HistoryService.GetViewedStories();
+            Stories = await HistoryService.GetViewedStories(x => x.IsFavorite == true);
             IsRefreshing = false;
         }
 
@@ -54,27 +54,11 @@ namespace PhotographerPortfolioMobile.ViewModels
         }
 
         [RelayCommand]
-        public async Task ClearHistory()
-        {
-            IsBusy = true;
-            await ViewedStoryService.RemoveAllViewedStories();
-            Stories.Clear();
-            IsBusy = false;
-        }
-
-        [RelayCommand]
-        public async Task AddToFavorites(string storyId)
+        public async Task DeleteFromFavorites(string storyId)
         {
             var viewedStory = await ViewedStoryService.GetViewedStoryByStoryId(storyId);
-            viewedStory.IsFavorite = true;
+            viewedStory.IsFavorite = false;
             await ViewedStoryService.UpdateViewedStory(viewedStory);
-        }
-
-        [RelayCommand]
-        public async Task DeleteViewedStory(string storyId)
-        {
-            var viewedStory = await ViewedStoryService.GetViewedStoryByStoryId(storyId);
-            await ViewedStoryService.DeleteViewedStory(viewedStory);
             var story = Stories.Where(x => x.StoryId == storyId).FirstOrDefault();
             Stories.Remove(story);
         }

@@ -28,6 +28,11 @@ namespace PhotographerPortfolioMobile.Services.ViewedStoryService
             return ViewedStoryRepository.GetViewedStories();
         }
 
+        public Task<List<ViewedStory>> GetFavoriteViewedStories()
+        {
+            return ViewedStoryRepository.GetFavoriteViewedStories();
+        }
+
         public async Task<int> DeleteViewedStory(ViewedStory item)
         {
             var viewedStory = await ViewedStoryRepository.GetViewedStoryById(item.StoryId);

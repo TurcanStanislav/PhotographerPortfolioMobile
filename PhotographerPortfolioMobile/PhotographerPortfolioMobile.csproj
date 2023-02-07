@@ -49,9 +49,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
-	  <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.0-build-667.82300" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview3" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="4.1.0-build-910.86591" />
+	  <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.0-build-910.86591" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	  <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
 	  <PackageReference Include="SkiaSharp" Version="2.88.3" />
@@ -72,6 +72,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\FlyoutHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FavoriteStoriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ImagePopup.xaml">

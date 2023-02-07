@@ -106,10 +106,18 @@
     </FlyoutItem>
     <FlyoutItem Title="History"
                 FlyoutIcon="history">
-        <ShellContent
-                Title="History"
+        <Tab Title="History"
+             Icon="history">
+            <ShellContent
                 ContentTemplate="{DataTemplate views:HistoryPage}"
                 Route="HistoryPage" />
+        </Tab>
+        <Tab Title="Favorites"
+             Icon="favorite_icon.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:FavoriteStoriesPage}"
+                Route="FavoriteStoriesPage" />
+        </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Remove Ads"
                 FlyoutIcon="ads">

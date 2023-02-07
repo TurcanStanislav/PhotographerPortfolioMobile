@@ -3,7 +3,6 @@ using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
 using PhotographerPortfolioMobile.Tools;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 
 namespace PhotographerPortfolioMobile.Services.ScannerService
 {
@@ -47,13 +46,6 @@ namespace PhotographerPortfolioMobile.Services.ScannerService
             string json = await response.Content.ReadAsStringAsync();
             var imageScannerResponse = JsonConvert.DeserializeObject<ImageScannerResponse>(json);
             return imageScannerResponse;
-        }
-
-        public async Task<IEnumerable<Story>> GetStories()
-        {
-            var response = await Client.GetAsync(Constants.GetStoriesUrl);
-            var stories = await response.Content.ReadFromJsonAsync<List<Story>>();
-            return stories;
         }
     }
 }

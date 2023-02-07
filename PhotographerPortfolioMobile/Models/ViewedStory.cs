@@ -7,6 +7,7 @@ namespace PhotographerPortfolioMobile.Models
         [PrimaryKey]
         public string ViewedStoryId { get; set; } = Guid.NewGuid().ToString();
         public string StoryId { get; set; }
+        public bool IsFavorite { get; set; } = false;
         public DateTime WatchedTime { get; set; }
     }
 }

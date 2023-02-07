@@ -4,6 +4,7 @@ using PhotographerPortfolioMobile.Extensions;
 using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Text;
 
 namespace PhotographerPortfolioMobile.Services.HistoryService
@@ -21,10 +22,14 @@ namespace PhotographerPortfolioMobile.Services.HistoryService
             Client.DefaultRequestHeaders.Add("X-Ngrok-Auth", "2Jrkkhe3SjQFOyYw4own0XKsnfT_7djFeGu8wfMqjYo7F6WQ2");
         }
 
-        public async Task<ObservableCollection<Story>> GetViewedStories()
+        public async Task<ObservableCollection<Story>> GetViewedStories(Func<ViewedStory, bool> predicate = default)
         {
             var viewedStories = await ViewedStoryService.GetViewedStories();
-            var ids = viewedStories.Select(x => x.StoryId).ToList();
+            IEnumerable<string> ids;
+            if (predicate != null)
+                ids = viewedStories.Where(predicate).Select(x => x.StoryId).ToList();
+            else
+                ids = viewedStories.Select(x => x.StoryId).ToList();
 
             var data = new { Ids = ids, TimeZoneId = TimeZoneInfo.Local.Id };
 
@@ -47,6 +52,12 @@ namespace PhotographerPortfolioMobile.Services.HistoryService
 
             stories = stories.OrderByDescending(x => x.WatchedTime).ToObservableCollection();
 
+            return stories;
+        }
+        public async Task<IEnumerable<Story>> GetStories()
+        {
+            var response = await Client.GetAsync(Constants.GetStoriesUrl);
+            var stories = await response.Content.ReadFromJsonAsync<List<Story>>();
             return stories;
         }
     }

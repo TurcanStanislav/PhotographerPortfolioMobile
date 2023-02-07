@@ -39,6 +39,7 @@ namespace PhotographerPortfolioMobile.ViewModels
         {
             var popup = new ImagePopup(Story.ImagePath);
             page.ShowPopup(popup);
+            await Task.FromResult(false);
         }
     }
 }
