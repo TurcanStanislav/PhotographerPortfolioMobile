@@ -2,7 +2,7 @@
 {
     public static class Constants
     {
-        public const string BaseUrl = "https://e206-69-41-53-4.eu.ngrok.io";
+        public const string BaseUrl = "https://0e3b-69-41-53-4.eu.ngrok.io";
         public const string GetVideoByQRCodeUrl = BaseUrl + "/ImageScanner/GetVideoUrlByQRCode";
         public const string GetVideoByImageUrl = BaseUrl + "/ImageScanner/GetVideoUrlByImage";
         public const string GetStoriesUrl = BaseUrl + "/ImageScanner/GetStories";

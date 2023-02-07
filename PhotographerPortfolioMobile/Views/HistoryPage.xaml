@@ -17,14 +17,55 @@
                  Command="{Binding RefreshViewedStoriesCommand}">
         <ScrollView BackgroundColor="LightCyan">
             <Grid ColumnDefinitions="*"
-                  ColumnSpacing="5"
-                  RowDefinitions="*,Auto"
-                  RowSpacing="0">
-                <ContentView>
-                    <CollectionView ItemsSource="{Binding Stories}"
-                                    SelectionMode="None" >
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Story">
+                  RowDefinitions="Auto, *">
+                <Button Grid.Row="0" 
+                        Text="Clear History" 
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="15"
+                        WidthRequest="250"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Margin="0,10,0,5" 
+                        Command="{Binding ClearHistoryCommand}" />
+                <CollectionView Grid.Row="1"
+                                ItemsSource="{Binding Stories}"
+                                SelectionMode="None" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Story">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HistoryViewModel}}, Path=AddToFavoritesCommand}"
+                                                       CommandParameter="{Binding StoryId}">
+                                            <Frame BackgroundColor="LightGreen"
+                                                   BorderColor="WhiteSmoke"
+                                                   WidthRequest="60"
+                                                   HeightRequest="60"
+                                                   CornerRadius="50" 
+                                                   Padding="0">
+                                                <Image Source="favorite_icon.svg" 
+                                                       WidthRequest="30" 
+                                                       HeightRequest="30" 
+                                                       Aspect="AspectFill"/>
+                                            </Frame>
+                                        </SwipeItemView>
+                                        <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HistoryViewModel}}, Path=DeleteViewedStoryCommand}"
+                                                       CommandParameter="{Binding StoryId}">
+                                            <Frame BackgroundColor="LightPink"
+                                                   BorderColor="WhiteSmoke"
+                                                   WidthRequest="60"
+                                                   HeightRequest="60"
+                                                   CornerRadius="50" 
+                                                   Padding="0">
+                                                <Image Source="delete_icon.svg" 
+                                                       WidthRequest="30" 
+                                                       HeightRequest="30" 
+                                                       Aspect="AspectFill"/>
+                                            </Frame>
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
                                 <Grid Padding="0" 
                                       Margin="5,5,5,5" 
                                       HorizontalOptions="Fill">
@@ -39,8 +80,8 @@
                                         <Frame HeightRequest="125" Padding="0">
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HistoryViewModel}}, Path=GoToStoryDetailsCommand}"
-                                                              CommandParameter="{Binding .}"/>
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HistoryViewModel}}, Path=GoToStoryDetailsCommand}"
+                                                                CommandParameter="{Binding .}"/>
                                             </Frame.GestureRecognizers>
                                             <Frame.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -52,44 +93,52 @@
                                             <Grid Padding="0" 
                                                   Margin="0" 
                                                   ColumnDefinitions="125,*">
-                                                <Frame CornerRadius="5">
+                                                <Frame CornerRadius="5"
+                                                       Grid.Column="0">
                                                     <Image Aspect="AspectFill"
-                                                       HeightRequest="125"
-                                                       Source="{Binding ThumbPath}"
-                                                       WidthRequest="125" />
+                                                           HeightRequest="125"
+                                                           Source="{Binding ThumbPath}"
+                                                           WidthRequest="125" />
                                                 </Frame>
                                                 <Grid Grid.Column="1" 
                                                       RowDefinitions="30,3*,*"
                                                       Margin="10,0,0,0">
                                                     <Label Grid.Row="0"
-                                                           Text="{Binding StoryTitle}" 
-                                                           TextColor="NavajoWhite" 
-                                                           VerticalOptions="End"
-                                                           HorizontalOptions="Start"
-                                                           FontSize="18" 
-                                                           FontAttributes="Bold"/>
+                                                            Text="{Binding StoryTitle}" 
+                                                            TextColor="NavajoWhite" 
+                                                            VerticalOptions="End"
+                                                            HorizontalOptions="Start"
+                                                            FontSize="18" 
+                                                            FontAttributes="Bold"/>
                                                     <Label Grid.Row="1"
-                                                           Text="{Binding Path=Description, StringFormat='{0}...'}" 
-                                                           MaxLines="4"
-                                                           FontSize="14"
-                                                           TextColor="White"/>
+                                                            Text="{Binding Path=Description, StringFormat='{0}...'}" 
+                                                            MaxLines="4"
+                                                            FontSize="14"
+                                                            TextColor="White"/>
                                                     <Label Grid.Row="2"
-                                                           FontSize="11"
-                                                           FontAttributes="Bold"
-                                                           Padding="0,0,20,0"
-                                                           Text="{Binding WatchedTime}" 
-                                                           TextColor="White" 
-                                                           HorizontalOptions="End"
-                                                           VerticalOptions="Start"/>
+                                                            FontSize="11"
+                                                            FontAttributes="Bold"
+                                                            Padding="0,0,20,0"
+                                                            Text="{Binding WatchedTime}" 
+                                                            TextColor="White" 
+                                                            HorizontalOptions="End"
+                                                            VerticalOptions="Start"/>
                                                 </Grid>
                                             </Grid>
                                         </Frame>
                                     </Border>
                                 </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </ContentView>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator
+                    Grid.RowSpan="2"
+                    HorizontalOptions="Fill"
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="BlueViolet"
+                    VerticalOptions="Center" />
             </Grid>
         </ScrollView>
     </RefreshView>

@@ -8,15 +8,10 @@ namespace PhotographerPortfolioMobile.ViewModels
         private string imagePath;
 
         [ObservableProperty]
-        private int deviceHeight;
-
-        [ObservableProperty]
-        private int deviceWidth = 400;
+        private int popupSize = 400;
 
         public ImagePopupViewModel()
         {
-            //DeviceHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
-            //DeviceWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
         }
     }
 }

@@ -43,5 +43,10 @@ namespace PhotographerPortfolioMobile.Repositories
         {
             return await DbConnection.DeleteAsync(item);
         }
+
+        public async Task<int> DeleteAll()
+        {
+            return await DbConnection.Table<ViewedStory>().DeleteAsync(x => x.ViewedStoryId != null);
+        }
     }
 }

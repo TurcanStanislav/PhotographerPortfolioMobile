@@ -10,6 +10,7 @@ namespace PhotographerPortfolioMobile.ViewModels
     public partial class HistoryViewModel : BaseViewModel
     {
         private readonly IHistoryService HistoryService;
+        private readonly IViewedStoryService ViewedStoryService;
 
         [ObservableProperty]
         public ObservableCollection<Story> stories = new();
@@ -17,16 +18,19 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         public bool isRefreshing = false;
 
-        public HistoryViewModel(IHistoryService historyService)
+        public HistoryViewModel(IHistoryService historyService, IViewedStoryService viewedStoryService)
         {
             HistoryService = historyService;
+            ViewedStoryService = viewedStoryService;
         }
 
         [RelayCommand]
         public async Task GetViewedStories()
         {
+            IsBusy = true;
             if (Stories.Count == 0)
                 Stories = await HistoryService.GetViewedStories();
+            IsBusy = false;
         }
 
         [RelayCommand]
@@ -51,6 +55,30 @@ namespace PhotographerPortfolioMobile.ViewModels
             IsRefreshing = true;
             Stories = await HistoryService.GetViewedStories();
             IsRefreshing = false;
+        }
+
+        [RelayCommand]
+        public async Task ClearHistory()
+        {
+            IsBusy = true;
+            await ViewedStoryService.RemoveAllViewedStories();
+            Stories.Clear();
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        public async Task AddToFavorites(string storyId)
+        {
+            await Task.FromResult(true);
+        }
+
+        [RelayCommand]
+        public async Task DeleteViewedStory(string storyId)
+        {
+            var viewedStoryId = await ViewedStoryService.GetViewedStoryByStoryId(storyId);
+            await ViewedStoryService.DeleteViewedStory(viewedStoryId);
+            var story = Stories.Where(x => x.StoryId == storyId).FirstOrDefault();
+            Stories.Remove(story);
         }
     }
 }

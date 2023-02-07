@@ -15,5 +15,6 @@ namespace PhotographerPortfolioMobile.Repositories.Interfaces
         Task<int> UpdateViewedStory(ViewedStory item);
 
         Task<int> DeleteViewedStory(ViewedStory item);
+        Task<int> DeleteAll();
     }
 }

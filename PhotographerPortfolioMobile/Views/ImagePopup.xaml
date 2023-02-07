@@ -5,8 +5,10 @@
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:DataType="viewModels:ImagePopupViewModel"
              x:Class="PhotographerPortfolioMobile.Views.ImagePopup">
-        <Image WidthRequest="{Binding DeviceWidth}"
-               HeightRequest="{Binding DeviceWidth}"
+    
+        <Image WidthRequest="{Binding PopupSize}"
+               HeightRequest="{Binding PopupSize}"
                Source="{Binding ImagePath}">
         </Image>
+    
 </toolkit:Popup>

@@ -66,5 +66,10 @@ namespace PhotographerPortfolioMobile.Services.ViewedStoryService
                 return isSuccessful;
             }
         }
+
+        public async Task<int> RemoveAllViewedStories()
+        {
+            return await ViewedStoryRepository.DeleteAll();
+        }
     }
 }
