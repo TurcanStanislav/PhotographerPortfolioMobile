@@ -53,6 +53,7 @@ public static class MauiProgram
         builder.Services.AddTransient<HistoryViewModel>();
         builder.Services.AddTransient<StoryDetailsViewModel>();
         builder.Services.AddTransient<FavoriteStoriesViewModel>();
+        builder.Services.AddTransient<AppSharingViewModel>();
 
         //Pages
         builder.Services.AddTransient<QRScannerPage>();
@@ -61,6 +62,7 @@ public static class MauiProgram
         builder.Services.AddTransient<HistoryPage>();
         builder.Services.AddTransient<StoryDetailsPage>();
         builder.Services.AddTransient<FavoriteStoriesPage>();
+        builder.Services.AddTransient<AppSharingPage>();
 
         //Db
         builder.Services.AddTransient<AppDbContext>();
