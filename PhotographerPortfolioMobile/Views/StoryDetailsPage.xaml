@@ -9,14 +9,20 @@
              Title="{Binding Title}">
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,*">
-            <BoxView Color="Orange"
-                     Grid.RowSpan="2"
+            <BoxView Grid.RowSpan="2"
                      HorizontalOptions="Fill"
                      VerticalOptions="Fill" 
-                     CornerRadius="0, 0, 60, 60"/>
+                     CornerRadius="0, 0, 60, 60">
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="{DynamicResource GradientFirstColor}" Offset="0.4" />
+                        <GradientStop Color="{DynamicResource GradientSecondColor}" Offset="0.8" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
 
             <Border StrokeShape="RoundRectangle 80"
-                    Stroke="White"
+                    Stroke="{DynamicResource AppControlColor}"
                     StrokeThickness="6"
                     Margin="0,8,0,0"
                     HorizontalOptions="Center"
@@ -57,9 +63,9 @@
                         HorizontalOptions="Center"
                         Margin="0,5,0,0"
                         BackgroundColor="White"
-                        TextColor="Orange"
+                        TextColor="{DynamicResource AppControlColor}"
                         FontAttributes="Bold"
-                        BorderColor="Orange"
+                        BorderColor="{DynamicResource AppControlColor}"
                         BorderWidth="5"
                         CornerRadius="20"
                         FontSize="16"

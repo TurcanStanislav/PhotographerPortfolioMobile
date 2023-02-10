@@ -1,12 +1,14 @@
-﻿using PhotographerPortfolioMobile.Views;
+﻿using PhotographerPortfolioMobile.ViewModels;
+using PhotographerPortfolioMobile.Views;
 
 namespace PhotographerPortfolioMobile;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
+	public AppShell(AppShellViewModel vm)
 	{
 		InitializeComponent();
+		BindingContext = vm;
 
 		Routing.RegisterRoute(nameof(AdsPage), typeof(AdsPage));
 		Routing.RegisterRoute(nameof(HistoryPage), typeof(HistoryPage));

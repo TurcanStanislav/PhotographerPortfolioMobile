@@ -30,6 +30,8 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("AccidentalPresidency.ttf", "AccidentalPresidency");
+                fonts.AddFont("icons_webfont.ttf", "IconFontTypes");
             })
             .ConfigureMauiHandlers(h =>
             {
@@ -54,6 +56,7 @@ public static class MauiProgram
         builder.Services.AddTransient<StoryDetailsViewModel>();
         builder.Services.AddTransient<FavoriteStoriesViewModel>();
         builder.Services.AddTransient<AppSharingViewModel>();
+        builder.Services.AddTransient<AppShellViewModel>();
 
         //Pages
         builder.Services.AddTransient<QRScannerPage>();

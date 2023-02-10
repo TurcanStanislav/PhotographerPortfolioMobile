@@ -4,17 +4,90 @@
              xmlns:local="clr-namespace:PhotographerPortfolioMobile"
              x:Class="PhotographerPortfolioMobile.App">
     <Application.Resources>
+        <StyleSheet Source="Resources/Styles/styles.css" />
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Themes/LightTheme.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="ShellStyle" 
+                           TargetType="Shell">
+                        <Setter Property="BackgroundColor"
+                            Value="{DynamicResource PageHeaderColor}" />
+                        <Setter Property="TabBarTitleColor"
+                            Value="{DynamicResource SelectedTabIconColor}" />
+                        <Setter Property="TabBarUnselectedColor"
+                            Value="{DynamicResource TabIconColor}" />
+                    </Style>
 
-            <!--<Style x:Key="flyoutItemTitle" TargetType="FlyoutItem">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="FontSize" Value="16" />
-            </Style>-->
+                    <Style x:Key="FlyoutItemsSection"
+                           TargetType="Grid">
+                        <Setter Property="Padding"
+                                Value="20,10,10,10" />
+                        <Setter Property="ColumnSpacing"
+                                Value="10" />
+                        <Setter Property="VerticalOptions"
+                                Value="Center" />
+                        <Setter Property="BackgroundColor"
+                                Value="{DynamicResource FlyoutItemsSectionColor}" />
+                    </Style>
+
+                    <Style x:Key="FlyoutItemName" 
+                       TargetType="Label">
+                        <Setter Property="TextColor"
+                            Value="{DynamicResource TextColor}" />
+                        <Setter Property="FontSize"
+                            Value="17" />
+                        <Setter Property="FontAttributes"
+                            Value="Bold" />
+                        <Setter Property="Margin"
+                            Value="10,0,0,0" />
+                    </Style>
+
+                    <Style x:Key="FlyoutMenuTitle" 
+                       TargetType="Label">
+                        <Setter Property="TextColor"
+                            Value="{DynamicResource HeaderTextColor}" />
+                        <Setter Property="FontFamily"
+                            Value="AccidentalPresidency" />
+                        <Setter Property="FontSize"
+                            Value="50" />
+                        <Setter Property="HorizontalOptions"
+                            Value="Center" />
+                        <Setter Property="VerticalTextAlignment"
+                            Value="Center" />
+                    </Style>
+
+                    <Style x:Key="ChangeThemeIcon" 
+                           TargetType="ImageButton">
+                        <Setter Property="WidthRequest"
+                                Value="30" />
+                        <Setter Property="HeightRequest"
+                                Value="30" />
+                        <Setter Property="HorizontalOptions"
+                                Value="End" />
+                        <Setter Property="Margin"
+                                Value="0,0,10,0" />
+                        <Setter Property="VerticalOptions"
+                                Value="Center" />
+                    </Style>
+
+                    <Style x:Key="LogoTitle" 
+                           TargetType="Label">
+                        <Setter Property="HorizontalOptions"
+                                Value="Center" />
+                        <Setter Property="VerticalOptions"
+                                Value="Center" />
+                        <Setter Property="Margin"
+                                Value="0,0,0,10" />
+                        <Setter Property="FontSize"
+                                Value="24" />
+                        <Setter Property="TextColor"
+                                Value="{DynamicResource TextColor}" />
+                        <Setter Property="FontFamily"
+                                Value="AccidentalPresidency" />
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

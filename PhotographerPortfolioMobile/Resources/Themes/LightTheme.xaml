@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PhotographerPortfolioMobile.Resources.Themes.LightTheme">
+    <Color x:Key="PageHeaderColor">#4e88b9</Color>
+    <Color x:Key="PageBackgroundColor">#ffffff</Color>
+    <Color x:Key="AppControlColor">#68a6d9</Color>
+    <Color x:Key="FlyoutItemsSectionColor">#ffffff</Color>
+    <Color x:Key="FlyoutMenuHeaderColor">#68a6d9</Color>
+    <Color x:Key="FlyoutMenuBodyColor">#ffffff</Color>
+    <Color x:Key="FlyoutMenuFooterColor">#ffffff</Color>
+    <Color x:Key="TextColor">#000000</Color>
+    <Color x:Key="HeaderTextColor">#ffffff</Color>
+    <Color x:Key="LightGrayTextColor">#b2b3b4</Color>
+    <Color x:Key="ThemeIconColor">#000000</Color>
+    <Color x:Key="ChangeThemeIconColor">#ffffff</Color>
+    <Color x:Key="SelectedTabIconColor">#ffffff</Color>
+    <Color x:Key="TabIconColor">#bbd2e8</Color>
+    <Color x:Key="GradientFirstColor">#36d1dc</Color>
+    <Color x:Key="GradientSecondColor">#5b86e5</Color>
+    <Color x:Key="EditorPlaceholderTextColor">#b2b3b4</Color>
+    <Color x:Key="EditorBackgroundColor">White</Color>
+    <Color x:Key="EditorTextColor">Black</Color>
+    <Color x:Key="DeleteButtonColor">LightGray</Color>
+    <Color x:Key="AddToFavoriteButtonColor">LightGray</Color>
+</ResourceDictionary>

@@ -8,7 +8,7 @@
              x:DataType="viewModels:ImageScannerViewModel"
              Title="Image Scanner Page">
 
-    <Grid ColumnDefinitions="*" RowDefinitions="*" BackgroundColor="Black">
+    <Grid BackgroundColor="{DynamicResource PageBackgroundColor}">
         <!--<zxing:CameraView
             x:Name="imageScanner"
             IsTorchOn="False"

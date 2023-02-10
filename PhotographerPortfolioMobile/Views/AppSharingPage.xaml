@@ -4,6 +4,7 @@
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:Class="PhotographerPortfolioMobile.Views.AppSharingPage"
              x:DataType="viewModels:AppSharingViewModel"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
              Title="App Sharing">
     <Grid RowDefinitions="Auto,*">
         <Editor Grid.Row="0"
@@ -11,16 +12,18 @@
                 Margin="10,10,10,0"
                 HeightRequest="200"
                 Placeholder="Write your message"
-                BackgroundColor="WhiteSmoke"
-                PlaceholderColor="Gray"/>
+                BackgroundColor="{DynamicResource EditorBackgroundColor}"
+                TextColor="{DynamicResource EditorTextColor}"
+                PlaceholderColor="{DynamicResource EditorPlaceholderTextColor}"/>
         <Button Grid.Row="1"
                 VerticalOptions="Start"
                 Text="Share App" 
+                TextColor="White"
                 Margin="10"
                 WidthRequest="200"
                 HeightRequest="40"
                 CornerRadius="20"
-                BackgroundColor="BlueViolet" 
+                BackgroundColor="{DynamicResource AppControlColor}" 
                 Command="{Binding ShareAppCommand}"
                 CommandParameter="{Binding Source={x:Reference messageBox},
                                            Path=Text }"/>

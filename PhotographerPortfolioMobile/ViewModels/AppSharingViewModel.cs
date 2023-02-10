@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using PhotographerPortfolioMobile.Models;
 
 namespace PhotographerPortfolioMobile.ViewModels
 {
@@ -16,7 +17,7 @@ namespace PhotographerPortfolioMobile.ViewModels
             {
                 Title = "App Sharing",
                 Text = message,
-                Uri = "https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/basic-bindings?view=net-maui-7.0"
+                Uri = Constants.BaseUrl
             });
         }
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PhotographerPortfolioMobile.Helpers"
              xmlns:models="clr-namespace:PhotographerPortfolioMobile.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
@@ -15,7 +16,7 @@
     </ContentPage.Behaviors>
     <RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshFavoriteViewedStoriesCommand}">
-        <ScrollView BackgroundColor="LightCyan">
+        <ScrollView BackgroundColor="{DynamicResource PageBackgroundColor}">
             <Grid ColumnDefinitions="*"
                   RowDefinitions="*">
                 <CollectionView Grid.Row="1"
@@ -28,16 +29,20 @@
                                     <SwipeItems>
                                         <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=DeleteFromFavoritesCommand}"
                                                        CommandParameter="{Binding StoryId}">
-                                            <Frame BackgroundColor="LightPink"
-                                                   BorderColor="WhiteSmoke"
+                                            <Frame BackgroundColor="{DynamicResource DeleteButtonColor}"
                                                    WidthRequest="60"
                                                    HeightRequest="60"
                                                    CornerRadius="50" 
                                                    Padding="0">
-                                                <Image Source="delete_icon.svg" 
-                                                       WidthRequest="30" 
+                                                <Image WidthRequest="30" 
                                                        HeightRequest="30" 
-                                                       Aspect="AspectFill"/>
+                                                       Aspect="AspectFill">
+                                                    <Image.Source>
+                                                        <FontImageSource Color="White" 
+                                                                         Glyph="{x:Static local:IconFont.TrashCanOutline}"
+                                                                         FontFamily="IconFontTypes"/>
+                                                    </Image.Source>
+                                                </Image>
                                             </Frame>
                                         </SwipeItemView>
                                     </SwipeItems>
@@ -46,13 +51,8 @@
                                       Margin="5,5,5,5" 
                                       HorizontalOptions="Fill">
                                     <Border StrokeShape="RoundRectangle 30"
-                                            Stroke="White"
+                                            Stroke="{DynamicResource AppControlColor}"
                                             StrokeThickness="5">
-                                        <Border.Shadow>
-                                            <Shadow Brush="#00d4ff"
-                                                    Offset="20,15"
-                                                    Opacity="0.7" />
-                                        </Border.Shadow>
                                         <Frame HeightRequest="125" Padding="0">
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer NumberOfTapsRequired="1" 
@@ -61,9 +61,8 @@
                                             </Frame.GestureRecognizers>
                                             <Frame.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                    <GradientStop Color="#00d4ff" Offset="0.1" />
-                                                    <GradientStop Color="#090979" Offset="0.6" />
-                                                    <GradientStop Color="#020024" Offset="1.0" />
+                                                    <GradientStop Color="{DynamicResource GradientFirstColor}" Offset="0.5" />
+                                                    <GradientStop Color="{DynamicResource GradientSecondColor}" Offset="0.7" />
                                                 </LinearGradientBrush>
                                             </Frame.Background>
                                             <Grid Padding="0" 
