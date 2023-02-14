@@ -9,10 +9,7 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         private string videoUrl;
 
-        [ObservableProperty]
-        private int videoHeight = (int)double.Min(DeviceDisplay.Current.MainDisplayInfo.Height, DeviceDisplay.Current.MainDisplayInfo.Width) / 3;
-
-        private IDeviceOrientationService DeviceOrientationService { get; }
+        private readonly IDeviceOrientationService DeviceOrientationService;
 
         public VideoPlayerViewModel(IDeviceOrientationService deviceOrientationService)
         {

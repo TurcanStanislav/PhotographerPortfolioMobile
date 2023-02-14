@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PhotographerPortfolioMobile.Helpers;
 using PhotographerPortfolioMobile.Models;
+using PhotographerPortfolioMobile.Resources.Styles;
 using PhotographerPortfolioMobile.Resources.Themes;
 
 namespace PhotographerPortfolioMobile.ViewModels
@@ -9,13 +10,11 @@ namespace PhotographerPortfolioMobile.ViewModels
     public partial class AppShellViewModel : BaseViewModel
     {
         [ObservableProperty]
-        private AppThemes appTheme = AppThemes.LightTheme;
-
-        [ObservableProperty]
-        private string changeThemeIconGlyph = IconFont.WeatherNight;
+        private string changeThemeIconGlyph;
 
         public AppShellViewModel()
         {
+            ChangeThemeIconGlyph = UserPreferences.CurrentAppTheme == nameof(AppThemes.LightTheme) ? IconFont.WeatherNight : IconFont.WeatherSunny;
         }
 
         [RelayCommand]
@@ -28,19 +27,20 @@ namespace PhotographerPortfolioMobile.ViewModels
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Clear();
-                if (AppTheme == AppThemes.LightTheme)
+                if (UserPreferences.CurrentAppTheme == nameof(AppThemes.LightTheme))
                 {
                     mergedDictionaries.Add(new DarkTheme());
-                    AppTheme = AppThemes.DarkTheme;
+                    UserPreferences.CurrentAppTheme = nameof(AppThemes.DarkTheme);
                     ChangeThemeIconGlyph = IconFont.WeatherSunny;
                 }
                 else
                 {
                     mergedDictionaries.Add(new LightTheme());
-                    AppTheme = AppThemes.LightTheme;
+                    UserPreferences.CurrentAppTheme = nameof(AppThemes.LightTheme);
                     ChangeThemeIconGlyph = IconFont.WeatherNight;
                 }
 
+                mergedDictionaries.Add(new AppStyles());
             }
         }
     }

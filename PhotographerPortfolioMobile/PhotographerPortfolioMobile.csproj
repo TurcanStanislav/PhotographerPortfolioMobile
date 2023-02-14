@@ -33,6 +33,48 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>Photographer Portfolio Mobile</ApplicationTitle>
+	  <ApplicationId>com.companyname.photographerportfoliomobile1</ApplicationId>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -65,9 +107,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\Languages\UI.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>UI.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\StoryDetailsPage.xaml.cs">
 	    <DependentUpon>StoryDetailsPage.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Languages\UI.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>UI.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,6 +129,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\FlyoutHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\AppStyles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Themes\DarkTheme.xaml">
@@ -87,6 +144,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ImagePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\StoryDetailsPage.xaml">

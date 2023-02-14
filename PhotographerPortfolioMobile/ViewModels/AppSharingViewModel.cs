@@ -7,18 +7,18 @@ namespace PhotographerPortfolioMobile.ViewModels
     {
         public AppSharingViewModel()
         {
-
         }
 
         [RelayCommand]
-        public async Task ShareApp(string message)
+        public async Task ShareApp(Editor editor)
         {
             await Share.Default.RequestAsync(new ShareTextRequest
             {
                 Title = "App Sharing",
-                Text = message,
+                Text = editor.Text,
                 Uri = Constants.BaseUrl
             });
+            editor.Text = "";
         }
     }
 }

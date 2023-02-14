@@ -2,9 +2,9 @@ using PhotographerPortfolioMobile.ViewModels;
 
 namespace PhotographerPortfolioMobile.Views;
 
-public partial class AdsPage : ContentPage
+public partial class SettingsPage : ContentPage
 {
-	public AdsPage(AdsViewModel vm)
+	public SettingsPage(SettingsViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

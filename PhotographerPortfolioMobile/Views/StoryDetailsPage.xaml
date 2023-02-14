@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+             xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
              x:Class="PhotographerPortfolioMobile.Views.StoryDetailsPage"
              x:DataType="viewModels:StoryDetailsViewModel"
              x:Name="storyDetailsPage"
-             Title="{Binding Title}">
+             Title="{extensions:Translate StoryDetails}">
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,*">
             <BoxView Grid.RowSpan="2"
@@ -59,7 +60,7 @@
             <Grid RowDefinitions="Auto,*"
                   Grid.Row="2">
                 <Button Grid.Row="0"
-                        Text="Watch Video"
+                        Text="{extensions:Translate WatchVideo}"
                         HorizontalOptions="Center"
                         Margin="0,5,0,0"
                         BackgroundColor="White"
@@ -72,7 +73,7 @@
                         HeightRequest="40"
                         WidthRequest="200"
                         Command="{Binding DisplayVideoPlayerCommand}"
-                        CommandParameter="{Binding Story.VideoPath}"/>
+                        CommandParameter="{x:Reference storyDetailsPage}"/>
                 <Label Grid.Row="1"
                        Padding="10"  
                        FontSize="16" 

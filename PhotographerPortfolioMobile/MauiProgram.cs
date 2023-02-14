@@ -5,6 +5,7 @@ using PhotographerPortfolioMobile.Repositories.Interfaces;
 using PhotographerPortfolioMobile.Services.DeviceOrientationService;
 using PhotographerPortfolioMobile.Services.HistoryService;
 using PhotographerPortfolioMobile.Services.Interfaces;
+using PhotographerPortfolioMobile.Services.LocalStorageService;
 using PhotographerPortfolioMobile.Services.ScannerService;
 using PhotographerPortfolioMobile.Services.ViewedStoryService;
 using PhotographerPortfolioMobile.ViewModels;
@@ -44,6 +45,7 @@ public static class MauiProgram
         builder.Services.AddTransient<IScannerService, ScannerService>();
         builder.Services.AddTransient<IDeviceOrientationService, DeviceOrientationService>();
         builder.Services.AddTransient<IViewedStoryService, ViewedStoryService>();
+        builder.Services.AddTransient<ILocalStorageService, LocalStorageService>();
 
         //Repositories
         builder.Services.AddTransient<IViewedStoryRepository, ViewedStoryRepository>();
@@ -57,6 +59,8 @@ public static class MauiProgram
         builder.Services.AddTransient<FavoriteStoriesViewModel>();
         builder.Services.AddTransient<AppSharingViewModel>();
         builder.Services.AddTransient<AppShellViewModel>();
+        builder.Services.AddTransient<SettingsViewModel>();
+        builder.Services.AddTransient<AdsViewModel>();
 
         //Pages
         builder.Services.AddTransient<QRScannerPage>();
@@ -66,6 +70,8 @@ public static class MauiProgram
         builder.Services.AddTransient<StoryDetailsPage>();
         builder.Services.AddTransient<FavoriteStoriesPage>();
         builder.Services.AddTransient<AppSharingPage>();
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<AdsPage>();
 
         //Db
         builder.Services.AddTransient<AppDbContext>();

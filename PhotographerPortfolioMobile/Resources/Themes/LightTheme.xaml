@@ -5,6 +5,7 @@
     <Color x:Key="PageHeaderColor">#4e88b9</Color>
     <Color x:Key="PageBackgroundColor">#ffffff</Color>
     <Color x:Key="AppControlColor">#68a6d9</Color>
+    <Color x:Key="AppTitle1Color">#67ade6</Color>
     <Color x:Key="FlyoutItemsSectionColor">#ffffff</Color>
     <Color x:Key="FlyoutMenuHeaderColor">#68a6d9</Color>
     <Color x:Key="FlyoutMenuBodyColor">#ffffff</Color>
@@ -23,4 +24,6 @@
     <Color x:Key="EditorTextColor">Black</Color>
     <Color x:Key="DeleteButtonColor">LightGray</Color>
     <Color x:Key="AddToFavoriteButtonColor">LightGray</Color>
+    <Color x:Key="ButtonTextColor">#ffffff</Color>
+    <Color x:Key="VideoPlayerBackgroundColor">#000000</Color>
 </ResourceDictionary>

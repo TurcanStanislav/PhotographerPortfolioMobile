@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:Class="PhotographerPortfolioMobile.Views.QRScannerPage"
              x:DataType="viewModels:QRScannerViewModel"
-             Title="QR Scanner">
+             Title="{extensions:Translate QRScanner}">
 
     <Grid ColumnDefinitions="*" RowDefinitions="*, Auto">
         <zxing:CameraBarcodeReaderView

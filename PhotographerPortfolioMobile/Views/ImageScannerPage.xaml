@@ -4,9 +4,10 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+             xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
              x:Class="PhotographerPortfolioMobile.Views.ImageScannerPage"
              x:DataType="viewModels:ImageScannerViewModel"
-             Title="Image Scanner Page">
+             Title="{extensions:Translate ImageScanner}">
 
     <Grid BackgroundColor="{DynamicResource PageBackgroundColor}">
         <!--<zxing:CameraView

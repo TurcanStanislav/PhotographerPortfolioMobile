@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
              xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
              x:Class="PhotographerPortfolioMobile.Views.AppSharingPage"
              x:DataType="viewModels:AppSharingViewModel"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
-             Title="App Sharing">
+             Title="{extensions:Translate ShareApp}">
     <Grid RowDefinitions="Auto,*">
         <Editor Grid.Row="0"
                 x:Name="messageBox" 
-                Margin="10,10,10,0"
-                HeightRequest="200"
-                Placeholder="Write your message"
-                BackgroundColor="{DynamicResource EditorBackgroundColor}"
-                TextColor="{DynamicResource EditorTextColor}"
-                PlaceholderColor="{DynamicResource EditorPlaceholderTextColor}"/>
+                Style="{StaticResource EditorStyle}"
+                Margin="10,10,10,0" />
         <Button Grid.Row="1"
                 VerticalOptions="Start"
-                Text="Share App" 
-                TextColor="White"
+                Text="{extensions:Translate ShareApp}" 
+                FontAttributes="Bold"
+                FontSize="15"
+                TextColor="{DynamicResource ButtonTextColor}"
                 Margin="10"
                 WidthRequest="200"
                 HeightRequest="40"
                 CornerRadius="20"
                 BackgroundColor="{DynamicResource AppControlColor}" 
                 Command="{Binding ShareAppCommand}"
-                CommandParameter="{Binding Source={x:Reference messageBox},
-                                           Path=Text }"/>
+                CommandParameter="{x:Reference messageBox}"/>
     </Grid>
 </ContentPage>

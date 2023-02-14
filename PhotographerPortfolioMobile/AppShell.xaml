@@ -8,6 +8,7 @@
     xmlns:controls="clr-namespace:PhotographerPortfolioMobile.Controls"
     xmlns:helpers="clr-namespace:PhotographerPortfolioMobile.Helpers"
     xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+    xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
     xmlns:sys="clr-namespace:System;assembly=netstandard"
     Style="{StaticResource ShellStyle}"
     FlyoutBackgroundColor="{DynamicResource FlyoutItemsSectionColor}"
@@ -80,35 +81,35 @@
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
     
-    <FlyoutItem Title="QR Scanner">
+    <FlyoutItem Title="{extensions:Translate QRScanner}">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="IconFontTypes"
                 Glyph="{x:Static helpers:IconFont.QrcodeScan}" />
         </FlyoutItem.Icon>
         <ShellContent
-                Title="QR"
+                Title="{extensions:Translate QRScanner}"
                 ContentTemplate="{DataTemplate views:QRScannerPage}"
                 Route="QrScannerPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Image Scanner">
+    <FlyoutItem Title="{extensions:Translate ImageScanner}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 FontFamily="IconFontTypes"
                 Glyph="{x:Static helpers:IconFont.ImageSearch}"/>
         </FlyoutItem.Icon>
         <ShellContent
-                Title="Image"
+                Title="{extensions:Translate ImageScanner}"
                 ContentTemplate="{DataTemplate views:ImageScannerPage}"
                 Route="ImageScannerPage" />
     </FlyoutItem>
-    <FlyoutItem Title="History">
+    <FlyoutItem Title="{extensions:Translate History}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 FontFamily="IconFontTypes"
                 Glyph="{x:Static helpers:IconFont.History}"/>
         </FlyoutItem.Icon>
-        <Tab Title="History">
+        <Tab Title="{extensions:Translate History}">
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="IconFontTypes"
@@ -118,7 +119,7 @@
                 ContentTemplate="{DataTemplate views:HistoryPage}"
                 Route="HistoryPage" />
         </Tab>
-        <Tab Title="Favorites">
+        <Tab Title="{extensions:Translate Favorites}">
             <Tab.Icon>
                 <FontImageSource 
                     FontFamily="IconFontTypes"
@@ -129,27 +130,38 @@
                 Route="FavoriteStoriesPage" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Remove Ads">
+    <FlyoutItem Title="{extensions:Translate RemoveAds}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 FontFamily="IconFontTypes"
                 Glyph="{x:Static helpers:IconFont.AdvertisementsOff}"/>
         </FlyoutItem.Icon>
         <ShellContent
-                Title="Remove Ads"
+                Title="{extensions:Translate RemoveAds}"
                 ContentTemplate="{DataTemplate views:AdsPage}"
                 Route="AdsPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Share App">
+    <FlyoutItem Title="{extensions:Translate ShareApp}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 FontFamily="IconFontTypes"
                 Glyph="{x:Static helpers:IconFont.ShareVariantOutline}"/>
         </FlyoutItem.Icon>
         <ShellContent
-                Title="Share App"
+                Title="{extensions:Translate ShareApp}"
                 ContentTemplate="{DataTemplate views:AppSharingPage}"
                 Route="AppSharingPage" />
     </FlyoutItem>
 
+    <FlyoutItem Title="{extensions:Translate Settings}">
+        <FlyoutItem.Icon>
+            <FontImageSource 
+                FontFamily="IconFontTypes"
+                Glyph="{x:Static helpers:IconFont.Cogs}"/>
+        </FlyoutItem.Icon>
+        <ShellContent
+                Title="{extensions:Translate Settings}"
+                ContentTemplate="{DataTemplate views:SettingsPage}"
+                Route="SettingsPage" />
+    </FlyoutItem>
 </Shell> 

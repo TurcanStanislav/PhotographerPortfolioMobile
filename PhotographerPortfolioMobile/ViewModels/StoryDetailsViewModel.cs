@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PhotographerPortfolioMobile.Models;
+using PhotographerPortfolioMobile.Services.Interfaces;
 using PhotographerPortfolioMobile.Views;
 
 namespace PhotographerPortfolioMobile.ViewModels
@@ -18,26 +19,31 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         private int storyImageHeight = 160;
 
-        public StoryDetailsViewModel()
+        public StoryDetailsViewModel(IDeviceOrientationService deviceOrientationService)
         {
-            Title = "Story Details";
+            DeviceOrientationService = deviceOrientationService;
         }
 
+        private readonly IDeviceOrientationService DeviceOrientationService;
+
         [RelayCommand]
-        public async Task DisplayVideoPlayer(string videoPath)
+        public async Task DisplayVideoPlayer(ContentPage page)
         {
-            if (string.IsNullOrEmpty(videoPath))
+            if (string.IsNullOrEmpty(this.Story.VideoPath))
                 return;
 
-            await Shell.Current.GoToAsync(nameof(VideoPlayerPage), true, new Dictionary<string, object> {
-                { "VideoUrl", videoPath }
-            });
+            var videoPlayerVM = new VideoPlayerViewModel(DeviceOrientationService) { VideoUrl = this.Story.VideoPath };
+            await page.Navigation.PushAsync(new VideoPlayerPage(videoPlayerVM));
+            //await page.Navigation.PushModalAsync(new VideoPlayerPage(videoPlayerVM));
+            //await Shell.Current.GoToAsync(nameof(VideoPlayerPage), true, new Dictionary<string, object> {
+            //    { "VideoUrl", this.Story.VideoPath }
+            //});
         }
 
         [RelayCommand]
         public async Task ShowImagePopup(ContentPage page)
         {
-            var popup = new ImagePopup(Story.ImagePath);
+            var popup = new ImagePopup(this.Story.ImagePath);
             page.ShowPopup(popup);
             await Task.FromResult(false);
         }
