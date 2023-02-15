@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
-using PhotographerPortfolioMobile.Views;
 
 namespace PhotographerPortfolioMobile.ViewModels
 {
@@ -38,10 +37,11 @@ namespace PhotographerPortfolioMobile.ViewModels
                 {
                     await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
-                        await Shell.Current.GoToAsync(nameof(VideoPlayerPage), true, new Dictionary<string, object>
+                        var navParams = new Dictionary<string, object>
                         {
                             { "VideoUrl", VideoUrl }
-                        });
+                        };
+                        await Shell.Current.GoToAsync("videoPlayer", true, navParams);
                     });
                 }
             }

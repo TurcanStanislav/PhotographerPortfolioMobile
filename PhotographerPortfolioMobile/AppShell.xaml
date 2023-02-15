@@ -90,7 +90,7 @@
         <ShellContent
                 Title="{extensions:Translate QRScanner}"
                 ContentTemplate="{DataTemplate views:QRScannerPage}"
-                Route="QrScannerPage" />
+                Route="qrScanner" />
     </FlyoutItem>
     <FlyoutItem Title="{extensions:Translate ImageScanner}">
         <FlyoutItem.Icon>
@@ -101,9 +101,10 @@
         <ShellContent
                 Title="{extensions:Translate ImageScanner}"
                 ContentTemplate="{DataTemplate views:ImageScannerPage}"
-                Route="ImageScannerPage" />
+                Route="imageScanner" />
     </FlyoutItem>
-    <FlyoutItem Title="{extensions:Translate History}">
+    <FlyoutItem Title="{extensions:Translate History}"
+                Route="history">
         <FlyoutItem.Icon>
             <FontImageSource 
                 FontFamily="IconFontTypes"
@@ -117,7 +118,7 @@
             </Tab.Icon>
             <ShellContent
                 ContentTemplate="{DataTemplate views:HistoryPage}"
-                Route="HistoryPage" />
+                Route="watchedStories" />
         </Tab>
         <Tab Title="{extensions:Translate Favorites}">
             <Tab.Icon>
@@ -127,7 +128,7 @@
             </Tab.Icon>
             <ShellContent
                 ContentTemplate="{DataTemplate views:FavoriteStoriesPage}"
-                Route="FavoriteStoriesPage" />
+                Route="favoriteStories" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="{extensions:Translate RemoveAds}">
@@ -139,7 +140,7 @@
         <ShellContent
                 Title="{extensions:Translate RemoveAds}"
                 ContentTemplate="{DataTemplate views:AdsPage}"
-                Route="AdsPage" />
+                Route="ads" />
     </FlyoutItem>
     <FlyoutItem Title="{extensions:Translate ShareApp}">
         <FlyoutItem.Icon>
@@ -150,7 +151,7 @@
         <ShellContent
                 Title="{extensions:Translate ShareApp}"
                 ContentTemplate="{DataTemplate views:AppSharingPage}"
-                Route="AppSharingPage" />
+                Route="appSharing" />
     </FlyoutItem>
 
     <FlyoutItem Title="{extensions:Translate Settings}">
@@ -162,6 +163,6 @@
         <ShellContent
                 Title="{extensions:Translate Settings}"
                 ContentTemplate="{DataTemplate views:SettingsPage}"
-                Route="SettingsPage" />
+                Route="settings" />
     </FlyoutItem>
 </Shell> 

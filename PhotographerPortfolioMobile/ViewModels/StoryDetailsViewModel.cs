@@ -10,6 +10,9 @@ namespace PhotographerPortfolioMobile.ViewModels
     [QueryProperty(nameof(Story), "Story")]
     public partial class StoryDetailsViewModel : BaseViewModel
     {
+        private readonly IDeviceOrientationService DeviceOrientationService;
+        private readonly VideoPlayerViewModel VideoPlayerViewModel;
+
         [ObservableProperty]
         private Story story;
 
@@ -19,12 +22,11 @@ namespace PhotographerPortfolioMobile.ViewModels
         [ObservableProperty]
         private int storyImageHeight = 160;
 
-        public StoryDetailsViewModel(IDeviceOrientationService deviceOrientationService)
+        public StoryDetailsViewModel(IDeviceOrientationService deviceOrientationService, VideoPlayerViewModel videoPlayerViewModel)
         {
             DeviceOrientationService = deviceOrientationService;
+            VideoPlayerViewModel = videoPlayerViewModel;
         }
-
-        private readonly IDeviceOrientationService DeviceOrientationService;
 
         [RelayCommand]
         public async Task DisplayVideoPlayer(ContentPage page)
@@ -32,12 +34,11 @@ namespace PhotographerPortfolioMobile.ViewModels
             if (string.IsNullOrEmpty(this.Story.VideoPath))
                 return;
 
-            var videoPlayerVM = new VideoPlayerViewModel(DeviceOrientationService) { VideoUrl = this.Story.VideoPath };
-            await page.Navigation.PushAsync(new VideoPlayerPage(videoPlayerVM));
-            //await page.Navigation.PushModalAsync(new VideoPlayerPage(videoPlayerVM));
-            //await Shell.Current.GoToAsync(nameof(VideoPlayerPage), true, new Dictionary<string, object> {
-            //    { "VideoUrl", this.Story.VideoPath }
-            //});
+            var navParams = new Dictionary<string, object>
+            {
+                { "VideoUrl", this.Story.VideoPath }
+            };
+            await Shell.Current.GoToAsync("videoPlayer", true, navParams);
         }
 
         [RelayCommand]

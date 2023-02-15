@@ -7,6 +7,7 @@
              x:Class="PhotographerPortfolioMobile.Views.StoryDetailsPage"
              x:DataType="viewModels:StoryDetailsViewModel"
              x:Name="storyDetailsPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
              Title="{extensions:Translate StoryDetails}">
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,*">
@@ -63,7 +64,7 @@
                         Text="{extensions:Translate WatchVideo}"
                         HorizontalOptions="Center"
                         Margin="0,5,0,0"
-                        BackgroundColor="White"
+                        BackgroundColor="{DynamicResource PageBackgroundColor}"
                         TextColor="{DynamicResource AppControlColor}"
                         FontAttributes="Bold"
                         BorderColor="{DynamicResource AppControlColor}"
@@ -77,7 +78,7 @@
                 <Label Grid.Row="1"
                        Padding="10"  
                        FontSize="16" 
-                       TextColor="Black" 
+                       TextColor="{DynamicResource TextColor}" 
                        Text="{Binding Story.Description}" />
             </Grid>
         </Grid>

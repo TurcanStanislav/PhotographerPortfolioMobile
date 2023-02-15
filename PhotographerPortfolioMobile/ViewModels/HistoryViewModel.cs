@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
-using PhotographerPortfolioMobile.Views;
 using System.Collections.ObjectModel;
 
 namespace PhotographerPortfolioMobile.ViewModels
@@ -47,10 +46,11 @@ namespace PhotographerPortfolioMobile.ViewModels
             if (story == null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(StoryDetailsPage), true, new Dictionary<string, object>
+            var navParams = new Dictionary<string, object>
             {
                 {"Story", story}
-            });
+            };
+            await Shell.Current.GoToAsync("history/watchedStories/details", true, navParams);
         }
 
         [RelayCommand]

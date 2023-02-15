@@ -26,4 +26,6 @@
     <Color x:Key="AddToFavoriteButtonColor">LightGray</Color>
     <Color x:Key="ButtonTextColor">#ffffff</Color>
     <Color x:Key="VideoPlayerBackgroundColor">#000000</Color>
+    <Color x:Key="PopupBackgroundColor">#ffffff</Color>
+    <Color x:Key="TransparentColor">Transparent</Color>
 </ResourceDictionary>

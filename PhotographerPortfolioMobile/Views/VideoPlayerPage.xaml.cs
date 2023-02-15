@@ -11,7 +11,7 @@ public partial class VideoPlayerPage : ContentPage
     }
 
     [RequiresPreviewFeatures] //TODO: To remove this later when I will upgrade to stable release version
-    protected override void OnDisappearing()
+    protected override async void OnDisappearing()
     {
         videoPlayer.Stop();
         base.OnDisappearing();
