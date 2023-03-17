@@ -1,104 +1,124 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:PhotographerPortfolioMobile.Helpers"
-             xmlns:models="clr-namespace:PhotographerPortfolioMobile.Models"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
-             xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
-             x:Class="PhotographerPortfolioMobile.Views.FavoriteStoriesPage"
-             x:DataType="viewModels:FavoriteStoriesViewModel"
-             Title="{extensions:Translate Favorites}">
+<ContentPage
+    x:Class="PhotographerPortfolioMobile.Views.FavoriteStoriesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
+    xmlns:local="clr-namespace:PhotographerPortfolioMobile.Helpers"
+    xmlns:models="clr-namespace:PhotographerPortfolioMobile.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+    Title="{extensions:Translate Favorites}"
+    x:DataType="viewModels:FavoriteStoriesViewModel">
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior 
-            EventName="Appearing"
-            Command="{Binding GetFavoriteViewedStoriesCommand}"/>
+        <toolkit:EventToCommandBehavior Command="{Binding GetFavoriteViewedStoriesCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 Command="{Binding RefreshFavoriteViewedStoriesCommand}">
+    <RefreshView Command="{Binding RefreshFavoriteViewedStoriesCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ScrollView BackgroundColor="{DynamicResource PageBackgroundColor}">
-            <Grid ColumnDefinitions="*"
-                  RowDefinitions="*">
-                <CollectionView Grid.Row="1"
-                                ItemsSource="{Binding Stories}"
-                                SelectionMode="None" >
+            <Grid ColumnDefinitions="*" RowDefinitions="*">
+                <CollectionView
+                    Grid.Row="1"
+                    ItemsSource="{Binding Stories}"
+                    SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Story">
                             <SwipeView>
                                 <SwipeView.RightItems>
                                     <SwipeItems>
-                                        <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=DeleteFromFavoritesCommand}"
-                                                       CommandParameter="{Binding StoryId}">
-                                            <Frame BackgroundColor="{DynamicResource DeleteButtonColor}"
-                                                   WidthRequest="60"
-                                                   HeightRequest="60"
-                                                   CornerRadius="50" 
-                                                   Padding="0">
-                                                <Image WidthRequest="30" 
-                                                       HeightRequest="30" 
-                                                       Aspect="AspectFill">
+                                        <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=DeleteFromFavoritesCommand}" CommandParameter="{Binding StoryId}">
+                                            <Frame
+                                                Padding="0"
+                                                BackgroundColor="{DynamicResource DeleteButtonColor}"
+                                                CornerRadius="50"
+                                                HeightRequest="60"
+                                                WidthRequest="60">
+                                                <Image
+                                                    Aspect="AspectFill"
+                                                    HeightRequest="30"
+                                                    WidthRequest="30">
                                                     <Image.Source>
-                                                        <FontImageSource Color="White" 
-                                                                         Glyph="{x:Static local:IconFont.TrashCanOutline}"
-                                                                         FontFamily="IconFontTypes"/>
+                                                        <FontImageSource
+                                                            FontFamily="IconFontTypes"
+                                                            Glyph="{x:Static local:IconFont.TrashCanOutline}"
+                                                            Color="White" />
                                                     </Image.Source>
                                                 </Image>
                                             </Frame>
                                         </SwipeItemView>
                                     </SwipeItems>
                                 </SwipeView.RightItems>
-                                <Grid Padding="0" 
-                                      Margin="5,5,5,5" 
-                                      HorizontalOptions="Fill">
-                                    <Border StrokeShape="RoundRectangle 30"
-                                            Stroke="{DynamicResource AppControlColor}"
-                                            StrokeThickness="5">
-                                        <Frame HeightRequest="125" Padding="0">
+                                <Grid
+                                    Margin="5,5,5,5"
+                                    Padding="0"
+                                    HorizontalOptions="Fill">
+                                    <Border
+                                        Stroke="{DynamicResource AppControlColor}"
+                                        StrokeShape="RoundRectangle 30"
+                                        StrokeThickness="5">
+                                        <Frame Padding="0" HeightRequest="125">
                                             <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=GoToStoryDetailsCommand}"
-                                                                CommandParameter="{Binding .}"/>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FavoriteStoriesViewModel}}, Path=GoToStoryDetailsCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    NumberOfTapsRequired="1" />
                                             </Frame.GestureRecognizers>
                                             <Frame.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                    <GradientStop Color="{DynamicResource GradientFirstColor}" Offset="0.5" />
-                                                    <GradientStop Color="{DynamicResource GradientSecondColor}" Offset="0.7" />
+                                                    <GradientStop Offset="0.5" Color="{DynamicResource GradientFirstColor}" />
+                                                    <GradientStop Offset="0.7" Color="{DynamicResource GradientSecondColor}" />
                                                 </LinearGradientBrush>
                                             </Frame.Background>
-                                            <Grid Padding="0" 
-                                                  Margin="0" 
-                                                  ColumnDefinitions="125,*">
-                                                <Frame CornerRadius="5"
-                                                       Grid.Column="0">
-                                                    <Image Aspect="AspectFill"
-                                                           HeightRequest="125"
-                                                           Source="{Binding ThumbPath}"
-                                                           WidthRequest="125" />
-                                                </Frame>
-                                                <Grid Grid.Column="1" 
-                                                      RowDefinitions="30,3*,*"
-                                                      Margin="10,0,0,0">
-                                                    <Label Grid.Row="0"
-                                                            Text="{Binding StoryTitle}" 
-                                                            TextColor="NavajoWhite" 
-                                                            VerticalOptions="End"
-                                                            HorizontalOptions="Start"
-                                                            FontSize="18" 
-                                                            FontAttributes="Bold"/>
-                                                    <Label Grid.Row="1"
-                                                            Text="{Binding Path=Description, StringFormat='{0}...'}" 
-                                                            MaxLines="4"
-                                                            FontSize="14"
-                                                            TextColor="White"/>
-                                                    <Label Grid.Row="2"
-                                                            FontSize="11"
-                                                            FontAttributes="Bold"
-                                                            Padding="0,0,20,0"
-                                                            Text="{Binding WatchedTime}" 
-                                                            TextColor="White" 
-                                                            HorizontalOptions="End"
-                                                            VerticalOptions="Start"/>
+                                            <Grid
+                                                Margin="0"
+                                                Padding="0"
+                                                ColumnDefinitions="125,*">
+                                                <CarouselView Grid.Column="0" ItemsSource="{Binding Images}">
+                                                    <CarouselView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackLayout x:DataType="models:ImageData" Style="{StaticResource CarouselStyle}">
+                                                                <Frame
+                                                                    Padding="0"
+                                                                    BorderColor="DarkGray"
+                                                                    CornerRadius="5"
+                                                                    HasShadow="True">
+                                                                    <Image
+                                                                        Aspect="Center"
+                                                                        HeightRequest="125"
+                                                                        Source="{Binding ThumbUrl}"
+                                                                        WidthRequest="125" />
+                                                                </Frame>
+                                                            </StackLayout>
+                                                        </DataTemplate>
+                                                    </CarouselView.ItemTemplate>
+                                                </CarouselView>
+                                                <Grid
+                                                    Grid.Column="1"
+                                                    Margin="10,0,0,0"
+                                                    RowDefinitions="30,3*,*">
+                                                    <Label
+                                                        Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="18"
+                                                        HorizontalOptions="Start"
+                                                        Text="{Binding StoryTitle}"
+                                                        TextColor="NavajoWhite"
+                                                        VerticalOptions="End" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        FontSize="14"
+                                                        MaxLines="4"
+                                                        Text="{Binding Path=Description, StringFormat='{0}...'}"
+                                                        TextColor="White" />
+                                                    <Label
+                                                        Grid.Row="2"
+                                                        Padding="0,0,20,0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="11"
+                                                        HorizontalOptions="End"
+                                                        Text="{Binding WatchedTime}"
+                                                        TextColor="White"
+                                                        VerticalOptions="Start" />
                                                 </Grid>
                                             </Grid>
                                         </Frame>
@@ -107,13 +127,26 @@
                             </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label
+                                    Margin="10,25,10,10"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="Fill"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{extensions:Translate NoStoriesFound}" />
+                            </StackLayout>
+                        </ContentView>
+                    </CollectionView.EmptyView>
                 </CollectionView>
                 <ActivityIndicator
                     HorizontalOptions="Fill"
                     IsRunning="{Binding IsBusy}"
                     IsVisible="{Binding IsBusy}"
-                    Color="BlueViolet"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    Color="BlueViolet" />
             </Grid>
         </ScrollView>
     </RefreshView>

@@ -11,7 +11,7 @@ namespace PhotographerPortfolioMobile.ViewModels
         private readonly IViewedStoryService ViewedStoryService;
 
         [ObservableProperty]
-        private string videoUrl;
+        private string videoUrl = "";
 
         [ObservableProperty]
         private bool isScannerEnabled = true;
@@ -25,6 +25,7 @@ namespace PhotographerPortfolioMobile.ViewModels
         [RelayCommand]
         public async Task GetVideoUrlByImage(FileResult fileResult)
         {
+            VideoUrl = "";
             var response = await ScannerService.GetVideoUrlByImage(fileResult);
 
             if (response.Success == true)

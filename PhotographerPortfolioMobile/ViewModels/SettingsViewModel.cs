@@ -29,7 +29,7 @@ namespace PhotographerPortfolioMobile.ViewModels
         }
 
         [RelayCommand]
-        public async Task ChangeLanguage(string languageName)
+        public void ChangeLanguage(string languageName)
         {
             var cultureName = availableLanguages.FirstOrDefault(x => x.Value == languageName).Key;
 

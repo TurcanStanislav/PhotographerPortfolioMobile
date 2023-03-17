@@ -16,9 +16,15 @@ public partial class ImageScannerPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
-        if (photo != null)
-            await ImageScannerViewModel.GetVideoUrlByImageCommand.ExecuteAsync(photo);
+        do
+        {
+            FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+
+            if (photo != null)
+                await ImageScannerViewModel.GetVideoUrlByImageCommand.ExecuteAsync(photo);
+            else
+                break;
+        } while (string.IsNullOrEmpty(ImageScannerViewModel.VideoUrl));
     }
 }

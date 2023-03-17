@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PhotographerPortfolioMobile.Converters.Models;
 using PhotographerPortfolioMobile.Models;
 using PhotographerPortfolioMobile.Services.Interfaces;
 using PhotographerPortfolioMobile.Views;
@@ -42,10 +43,10 @@ namespace PhotographerPortfolioMobile.ViewModels
         }
 
         [RelayCommand]
-        public async Task ShowImagePopup(ContentPage page)
+        public async Task ShowImagePopup(ImagePopupParameters parameters)
         {
-            var popup = new ImagePopup(this.Story.ImagePath);
-            page.ShowPopup(popup);
+            var popup = new ImagePopup(parameters.ImageUrl);
+            parameters.Page.ShowPopup(popup);
             await Task.FromResult(false);
         }
     }

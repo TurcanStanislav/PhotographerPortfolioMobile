@@ -151,4 +151,7 @@
   <data name="WatchVideo" xml:space="preserve">
     <value>Watch video</value>
   </data>
+  <data name="NoStoriesFound" xml:space="preserve">
+    <value>No stories found</value>
+  </data>
 </root>

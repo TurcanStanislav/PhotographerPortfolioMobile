@@ -124,6 +124,15 @@ namespace PhotographerPortfolioMobile.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No stories found.
+        /// </summary>
+        internal static string NoStoriesFound {
+            get {
+                return ResourceManager.GetString("NoStoriesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to QR Scanner.
         /// </summary>
         internal static string QRScanner {

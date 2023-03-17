@@ -151,4 +151,7 @@
   <data name="WatchVideo" xml:space="preserve">
     <value>Vizualizează video-ul</value>
   </data>
+  <data name="NoStoriesFound" xml:space="preserve">
+    <value>Nu au fost găsite Stories</value>
+  </data>
 </root>

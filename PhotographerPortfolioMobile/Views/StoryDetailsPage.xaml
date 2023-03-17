@@ -1,85 +1,140 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
-             xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
-             x:Class="PhotographerPortfolioMobile.Views.StoryDetailsPage"
-             x:DataType="viewModels:StoryDetailsViewModel"
-             x:Name="storyDetailsPage"
-             BackgroundColor="{DynamicResource PageBackgroundColor}"
-             Title="{extensions:Translate StoryDetails}">
+<ContentPage
+    x:Class="PhotographerPortfolioMobile.Views.StoryDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:PhotographerPortfolioMobile.Converters"
+    xmlns:extensions="clr-namespace:PhotographerPortfolioMobile.Extensions"
+    xmlns:models="clr-namespace:PhotographerPortfolioMobile.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:PhotographerPortfolioMobile.ViewModels"
+    x:Name="storyDetailsPage"
+    Title="{extensions:Translate StoryDetails}"
+    x:DataType="viewModels:StoryDetailsViewModel"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.Resources>
+        <converters:ImagePopupParametersConverter x:Key="imagePopupParametersConverter" />
+    </ContentPage.Resources>
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,*">
-            <BoxView Grid.RowSpan="2"
-                     HorizontalOptions="Fill"
-                     VerticalOptions="Fill" 
-                     CornerRadius="0, 0, 60, 60">
+            <BoxView
+                Grid.RowSpan="2"
+                CornerRadius="0, 0, 60, 60"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
                 <BoxView.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="{DynamicResource GradientFirstColor}" Offset="0.4" />
-                        <GradientStop Color="{DynamicResource GradientSecondColor}" Offset="0.8" />
+                        <GradientStop Offset="0.4" Color="{DynamicResource GradientFirstColor}" />
+                        <GradientStop Offset="0.8" Color="{DynamicResource GradientSecondColor}" />
                     </LinearGradientBrush>
                 </BoxView.Background>
             </BoxView>
 
-            <Border StrokeShape="RoundRectangle 80"
-                    Stroke="{DynamicResource AppControlColor}"
-                    StrokeThickness="6"
-                    Margin="0,8,0,0"
-                    HorizontalOptions="Center"
+            <!--<Border
+                Margin="0,8,0,0"
+                HorizontalOptions="Center"
+                Stroke="{DynamicResource AppControlColor}"
+                StrokeShape="RoundRectangle 30"
+                StrokeThickness="6"
+                VerticalOptions="Center">-->
+            <StackLayout
+                Margin="0,10,0,0"
+                HeightRequest="200"
+                WidthRequest="600">
+                <CarouselView
+                    IndicatorView="indicatorView"
+                    IsBounceEnabled="False"
+                    ItemsSource="{Binding Story.Images}"
+                    PeekAreaInsets="80"
                     VerticalOptions="Center">
-                <Image Aspect="AspectFit"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="CenterAndExpand"
-                       HeightRequest="{Binding StoryImageHeight}"
-                       Source="{Binding Story.ThumbPath}">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                              Command="{Binding ShowImagePopupCommand}" 
-                                              CommandParameter="{x:Reference storyDetailsPage}"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </Border>
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
+                    </CarouselView.ItemsLayout>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ImageData">
+                            <StackLayout Style="{StaticResource CarouselStyle}">
+                                <Label
+                                    x:Name="imageUrlHiddenLabel"
+                                    IsEnabled="false"
+                                    IsVisible="false"
+                                    Text="{Binding ImageUrl}" />
+                                <Frame
+                                    Padding="0"
+                                    BorderColor="{DynamicResource AppControlColor}"
+                                    CornerRadius="5"
+                                    HasShadow="True">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        BackgroundColor="{DynamicResource PopupBackgroundColor}"
+                                        HeightRequest="180"
+                                        Source="{Binding ThumbUrl}"
+                                        VerticalOptions="CenterAndExpand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:StoryDetailsViewModel}}, Path=ShowImagePopupCommand}" NumberOfTapsRequired="1">
+                                                <TapGestureRecognizer.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource imagePopupParametersConverter}">
+                                                        <Binding Source="{x:Reference storyDetailsPage}" />
+                                                        <Binding Path="Text" Source="{x:Reference imageUrlHiddenLabel}" />
+                                                    </MultiBinding>
+                                                </TapGestureRecognizer.CommandParameter>
+                                            </TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView
+                    x:Name="indicatorView"
+                    Margin="0,5,0,0"
+                    HorizontalOptions="Center"
+                    IndicatorColor="LightGray"
+                    SelectedIndicatorColor="DarkGray" />
+            </StackLayout>
+            <!--</Border>-->
 
-            <Grid Grid.Row="1"  
-                  RowDefinitions="Auto,*">
-                <Label Grid.Row="0"
-                       TextColor="White"
-                       FontSize="20"
-                       Margin="0,0,0,0"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       Text="{Binding Story.StoryTitle}"/>
-                <Label Grid.Row="1" 
-                       FontSize="14" 
-                       TextColor="White" 
-                       HorizontalOptions="Center" 
-                       Text="{Binding Story.CreationTime}" />
+            <Grid Grid.Row="1" RowDefinitions="Auto,*">
+                <Label
+                    Grid.Row="0"
+                    Margin="0,0,0,0"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    Text="{Binding Story.StoryTitle}"
+                    TextColor="White" />
+                <Label
+                    Grid.Row="1"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="{Binding Story.CreationTime}"
+                    TextColor="White" />
             </Grid>
-            
-            <Grid RowDefinitions="Auto,*"
-                  Grid.Row="2">
-                <Button Grid.Row="0"
-                        Text="{extensions:Translate WatchVideo}"
-                        HorizontalOptions="Center"
-                        Margin="0,5,0,0"
-                        BackgroundColor="{DynamicResource PageBackgroundColor}"
-                        TextColor="{DynamicResource AppControlColor}"
-                        FontAttributes="Bold"
-                        BorderColor="{DynamicResource AppControlColor}"
-                        BorderWidth="5"
-                        CornerRadius="20"
-                        FontSize="16"
-                        HeightRequest="40"
-                        WidthRequest="200"
-                        Command="{Binding DisplayVideoPlayerCommand}"
-                        CommandParameter="{x:Reference storyDetailsPage}"/>
-                <Label Grid.Row="1"
-                       Padding="10"  
-                       FontSize="16" 
-                       TextColor="{DynamicResource TextColor}" 
-                       Text="{Binding Story.Description}" />
+
+            <Grid Grid.Row="2" RowDefinitions="Auto,*">
+                <Button
+                    Grid.Row="0"
+                    Margin="0,5,0,0"
+                    BackgroundColor="{DynamicResource PageBackgroundColor}"
+                    BorderColor="{DynamicResource AppControlColor}"
+                    BorderWidth="5"
+                    Command="{Binding DisplayVideoPlayerCommand}"
+                    CommandParameter="{x:Reference storyDetailsPage}"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Text="{extensions:Translate WatchVideo}"
+                    TextColor="{DynamicResource AppControlColor}"
+                    WidthRequest="200" />
+                <Label
+                    Grid.Row="1"
+                    Padding="10"
+                    FontSize="16"
+                    Text="{Binding Story.Description}"
+                    TextColor="{DynamicResource TextColor}" />
             </Grid>
         </Grid>
     </ScrollView>

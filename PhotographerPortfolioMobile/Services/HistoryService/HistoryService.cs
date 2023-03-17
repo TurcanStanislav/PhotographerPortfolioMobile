@@ -35,22 +35,35 @@ namespace PhotographerPortfolioMobile.Services.HistoryService
 
             var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
             var response = await Client.PostAsync(Constants.GetStoriesByIdsUrl, content);
+            ObservableCollection<Story> stories;
 
-            string json = await response.Content.ReadAsStringAsync();
-            var stories = JsonConvert.DeserializeObject<ObservableCollection<Story>>(json);
-
-            foreach (var story in stories)
+            if (response.IsSuccessStatusCode)
             {
-                story.CreationTime = story.CreationTime;
-                story.WatchedTime = viewedStories.Where(x => x.StoryId == story.StoryId)
-                                                 .FirstOrDefault().WatchedTime
-                                                 .ConvertToTimeZone();
-                story.ImagePath = string.Concat(Constants.BaseUrl, story.ImagePath);
-                story.ThumbPath = string.Concat(Constants.BaseUrl, story.ThumbPath);
-                story.VideoPath = string.Concat(Constants.BaseUrl, story.VideoPath);
-            }
+                string json = await response.Content.ReadAsStringAsync();
+                stories = JsonConvert.DeserializeObject<ObservableCollection<Story>>(json);
 
-            stories = stories.OrderByDescending(x => x.WatchedTime).ToObservableCollection();
+                foreach (var story in stories)
+                {
+                    story.CreationTime = story.CreationTime;
+                    story.WatchedTime = viewedStories.Where(x => x.StoryId == story.StoryId)
+                                                     .FirstOrDefault().WatchedTime
+                                                     .ConvertToTimeZone();
+
+                    foreach (var image in story.Images)
+                    {
+                        image.ImageUrl = string.Concat(Constants.BaseUrl, image.ImageUrl);
+                        image.ThumbUrl = string.Concat(Constants.BaseUrl, image.ThumbUrl);
+                    }
+
+                    story.VideoPath = string.Concat(Constants.BaseUrl, story.VideoPath);
+                }
+
+                stories = stories.OrderByDescending(x => x.WatchedTime).ToObservableCollection();
+            }
+            else
+            {
+                stories = new();
+            }
 
             return stories;
         }
